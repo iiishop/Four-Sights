@@ -14,6 +14,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- D3 and TopoJSON for map -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
+
   <!-- 引入本地样式 -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -76,7 +80,12 @@
               statistics on average house prices and rents.</p>
           </div>
           <div class="map-container">
-            <div class="map-placeholder">Interactive London borough Map</div>
+            <svg width="960" height="600"></svg>
+            <div class="tooltip"></div>
+            <div id="sliderContainer">
+              <input type="range" id="dateSlider" min="0" max="0" value="0">
+              <span id="dateLabel"></span>
+            </div>
           </div>
           <p style="text-align:center;color:var(--text-light);font-style:italic;">Source: Office for National Statistics
           </p>
@@ -598,6 +607,7 @@
 
   <!-- 引入本地脚本 -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/map.js"></script>
 </body>
 
 </html>
