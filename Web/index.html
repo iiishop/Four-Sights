@@ -7,13 +7,17 @@
   <title>London Borough Housing Market Analysis 2025</title>
   <meta name="description"
     content="Comprehensive analysis of London's housing market. Compare boroughs by house prices, rental growth, population, and key housing indicators.">
-  
+
   <!-- 引入外部资源 -->
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
+  <!-- D3 and TopoJSON for map -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
+
   <!-- 引入本地样式 -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -86,7 +90,12 @@
               statistics on average house prices and rents.</p>
           </div>
           <div class="map-container">
-            <div class="map-placeholder">Interactive London borough Map</div>
+            <svg width="960" height="600"></svg>
+            <div class="tooltip"></div>
+            <div id="sliderContainer">
+              <input type="range" id="dateSlider" min="0" max="0" value="0">
+              <span id="dateLabel"></span>
+            </div>
           </div>
           <p style="text-align:center;color:var(--text-light);font-style:italic;">Source: Office for National Statistics
           </p>
@@ -538,21 +547,25 @@
         <section id="contacts">
           <div class="section-title">
             <h2>Contact Us</h2>
-            <p>Have questions about London's housing market or need personalized advice? Get in touch with our experts.</p>
+            <p>Have questions about London's housing market or need personalized advice? Get in touch with our experts.
+            </p>
           </div>
           <div style="max-width: 600px; margin: 0 auto;">
             <form>
               <div style="margin-bottom: 15px;">
                 <label for="name" style="display: block; margin-bottom: 5px; font-weight: 600;">Your Name</label>
-                <input type="text" id="name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                <input type="text" id="name"
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
               </div>
               <div style="margin-bottom: 15px;">
                 <label for="email" style="display: block; margin-bottom: 5px; font-weight: 600;">Email Address</label>
-                <input type="email" id="email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                <input type="email" id="email"
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
               </div>
               <div style="margin-bottom: 15px;">
                 <label for="message" style="display: block; margin-bottom: 5px; font-weight: 600;">Your Message</label>
-                <textarea id="message" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                <textarea id="message" rows="4"
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Send Message</button>
             </form>
@@ -604,6 +617,7 @@
 
   <!-- 引入本地脚本 -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/map.js"></script>
 </body>
 
 </html>
