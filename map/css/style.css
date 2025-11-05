@@ -1,0 +1,15 @@
+svg { border: 1px solid #ccc; }
+.tooltip {
+  position: absolute;
+  text-align: left;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  border-radius: 6px;
+  pointer-events: none;
+  font-size: 13px;
+  line-height: 1.4em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+#container { display: flex; gap: 20px; }
+#sliderContainer { margin: 10px; }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>London Boroughs Map with Average Price</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="sliderContainer">
+  <button id="playPauseBtn">Play</button>
+  <input type="range" id="dateSlider" min="0" max="0" value="0">
+  <span id="dateLabel"></span>
+</div>
+
+<div id="container">
+  <svg id="mapSvg" width="600" height="600"></svg>
+  <svg id="lineChart" width="800" height="600"></svg>
+</div>
+
+<div class="tooltip"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
