@@ -13,3 +13,14 @@ svg { border: 1px solid #ccc; }
 }
 #container { display: flex; gap: 20px; }
 #sliderContainer { margin: 10px; }
+
+#container {
+  display: flex;
+  gap: 20px;
+}
+
+#rightPanel {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  gap: 20px;
+}

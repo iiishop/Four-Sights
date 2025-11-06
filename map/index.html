@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>London Boroughs Map with Average Price</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -14,14 +14,17 @@
 </div>
 
 <div id="container">
-  <svg id="mapSvg" width="600" height="600"></svg>
-  <svg id="lineChart" width="800" height="600"></svg>
+  <svg id="mapSvg" width="800" height="600"></svg>
+  <div id="rightPanel">
+    <svg id="lineChart" width="600" height="300"></svg>
+    <svg id="rankChart" width="600" height="260"></svg>
+  </div>
 </div>
 
 <div class="tooltip"></div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
-<script src="script.js"></script>
+<script src="js/map.js"></script>
 </body>
 </html>
