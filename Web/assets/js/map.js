@@ -1,8 +1,9 @@
 // IMPORTANT: Full category switching, Sales Volume support, UI control, dynamic legend, rank chart, line chart, and insight updates
 
-const svg = d3.select("#mapSvg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+const svg = d3.select("#mapSvg");
+// Use viewBox dimensions for consistent scaling
+const width = 800;
+const height = 600;
 
 const tooltip = d3.select(".tooltip");
 const slider = d3.select("#dateSlider");
@@ -126,12 +127,13 @@ function createCategoryButtons() {
 createCategoryButtons();
 
 // Line Chart Setup
-const lineSvg = d3.select("#lineChart"),
-    lineWidth = +lineSvg.attr("width"),
-    lineHeight = +lineSvg.attr("height"),
-    margin = { top: 20, right: 60, bottom: 50, left: 60 },
-    chartWidth = lineWidth - margin.left - margin.right,
-    chartHeight = lineHeight - margin.top - margin.bottom;
+const lineSvg = d3.select("#lineChart");
+// Use viewBox dimensions instead of actual rendered size
+const lineWidth = 800;
+const lineHeight = 450;
+const margin = { top: 30, right: 80, bottom: 60, left: 80 };
+const chartWidth = lineWidth - margin.left - margin.right;
+const chartHeight = lineHeight - margin.top - margin.bottom;
 
 const lineG = lineSvg.append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
@@ -164,7 +166,11 @@ d3.json("data/london_topo.json").then(topo => {
 
     const path = d3.geoPath().projection(projection);
 
-    const boroughPaths = svg.append("g")
+    // Create container group for zoom and pan
+    const mapContainer = svg.append("g")
+        .attr("class", "map-container");
+
+    const boroughPaths = mapContainer.append("g")
         .attr("class", "boroughs")
         .selectAll("path")
         .data(geojson.features)
@@ -173,6 +179,57 @@ d3.json("data/london_topo.json").then(topo => {
         .attr("fill", "#ccc")
         .attr("stroke", "#fff")
         .attr("stroke-width", 1);
+
+    // Zoom behavior setup
+    const initialTransform = d3.zoomIdentity;
+    let currentZoom = 1;
+
+    const zoom = d3.zoom()
+        .scaleExtent([0.5, 3])
+        .on("zoom", (event) => {
+            mapContainer.attr("transform", event.transform);
+            currentZoom = event.transform.k;
+            updateZoomUI(currentZoom);
+
+            // Adjust stroke width based on zoom level for better visibility
+            boroughPaths.attr("stroke-width", 1 / currentZoom);
+        });
+
+    svg.call(zoom);
+
+    // Double-click to reset zoom
+    svg.on("dblclick.zoom", () => {
+        svg.transition().duration(500).call(zoom.transform, initialTransform);
+    });
+
+    // Zoom control buttons
+    const zoomInBtn = d3.select("#zoomInBtn");
+    const zoomOutBtn = d3.select("#zoomOutBtn");
+    const resetZoomBtn = d3.select("#resetZoomBtn");
+    const zoomSlider = d3.select("#zoomSlider");
+    const zoomLevel = d3.select("#zoomLevel");
+
+    function updateZoomUI(scale) {
+        zoomSlider.property("value", scale);
+        zoomLevel.text(`${Math.round(scale * 100)}%`);
+    }
+
+    zoomInBtn.on("click", () => {
+        svg.transition().duration(300).call(zoom.scaleBy, 1.3);
+    });
+
+    zoomOutBtn.on("click", () => {
+        svg.transition().duration(300).call(zoom.scaleBy, 0.7);
+    });
+
+    resetZoomBtn.on("click", () => {
+        svg.transition().duration(500).call(zoom.transform, initialTransform);
+    });
+
+    zoomSlider.on("input", function () {
+        const scale = +this.value;
+        svg.transition().duration(100).call(zoom.scaleTo, scale);
+    });
 
     //== Legend Setup
     const defs = svg.append("defs");
@@ -423,12 +480,13 @@ d3.json("data/london_topo.json").then(topo => {
         });
 
         // Rank Chart
-        const rankSvg = d3.select("#rankChart"),
-            rankWidth = +rankSvg.attr("width"),
-            rankHeight = +rankSvg.attr("height"),
-            rankMargin = { top: 40, right: 60, bottom: 50, left: 60 },
-            rankChartWidth = rankWidth - rankMargin.left - rankMargin.right,
-            rankChartHeight = rankHeight - rankMargin.top - rankMargin.bottom;
+        const rankSvg = d3.select("#rankChart");
+        // Use viewBox dimensions instead of actual rendered size
+        const rankWidth = 800;
+        const rankHeight = 500;
+        const rankMargin = { top: 50, right: 80, bottom: 60, left: 80 };
+        const rankChartWidth = rankWidth - rankMargin.left - rankMargin.right;
+        const rankChartHeight = rankHeight - rankMargin.top - rankMargin.bottom;
 
         const rankG = rankSvg.append("g")
             .attr("transform", `translate(${rankMargin.left},${rankMargin.top})`);

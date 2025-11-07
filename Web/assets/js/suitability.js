@@ -129,9 +129,11 @@
             londonBoroughs.includes(d.properties.NAME.trim())
         );
 
-        // Set up projection
-        const bounds = d3.geoBounds(geojson);
-        const projection = d3.geoMercator().fitSize([800, 500], geojson);
+        // Set up projection with manual centering
+        const projection = d3.geoMercator()
+            .center([-0.1, 51.5])  // London center coordinates
+            .scale(42000)           // Adjusted scale for better fit
+            .translate([400, 250]); // Center in viewBox (800/2, 500/2)
         const path = d3.geoPath().projection(projection);
 
         // Draw boroughs

@@ -703,44 +703,415 @@ footer {
 /* VISUALISATION SECTION (MAP & CHARTS) */
 #visualSection {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column;
+  gap: 30px;
   padding: 20px 0;
-  flex-wrap: wrap;
+  width: 100%;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#mapWrapper, #chartsWrapper {
-  flex: 1;
+#mapWrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-width: 300px;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-/* Ensure charts take full width of their wrapper */
-#chartsWrapper svg {
+#chartsWrapper {
   width: 100%;
-  height: 300px; /* fixed height for better display */
-  max-width: 100%; /* prevent overflow */
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 450px;
 }
 
 #mapWrapper svg {
   width: 100%;
   height: auto;
-  max-width: 800px;
+  max-width: 100%;
   display: block;
   margin: 0 auto;
 }
 
+/* Ensure charts take full width of their wrapper */
+#chartsWrapper svg {
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 1200px) {
+  #chartsWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fullscreen Button */
+.fullscreen-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.fullscreen-btn:hover {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+.fullscreen-btn i {
+  font-size: 22px;
+}
+
+/* Fullscreen mode styles */
+section.fullscreen-mode {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 40px !important;
+  z-index: 9999 !important;
+  overflow-y: auto !important;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%) !important;
+  animation: fullscreenEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Fullscreen enter animation */
+@keyframes fullscreenEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Fullscreen exit animation */
+section.fullscreen-exit-animation {
+  animation: fullscreenExit 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fullscreenExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+}
+
+/* Compare section fullscreen mode - horizontal layout */
+section.fullscreen-mode #visualSection {
+  display: grid !important;
+  grid-template-columns: 50% 50% !important;
+  gap: 20px !important;
+  height: calc(100vh - 250px) !important;
+  max-width: 100%;
+  align-items: stretch;
+}
+
+section.fullscreen-mode #mapWrapper {
+  height: 100% !important;
+  max-height: 100%;
+  padding: 25px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+/* Slide animations for fullscreen mode */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+section.fullscreen-mode #mapWrapper svg {
+  height: 100% !important;
+  max-height: calc(100vh - 400px) !important;
+}
+
+section.fullscreen-mode #chartsWrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  height: 100% !important;
+  overflow-y: auto;
+  padding-right: 5px;
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+/* Custom scrollbar for fullscreen charts */
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar-track {
+  background: #f1f3f5;
+  border-radius: 4px;
+}
+
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 4px;
+}
+
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
+
+section.fullscreen-mode .chart-container {
+  flex: 1 !important;
+  min-height: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  padding: 25px !important;
+}
+
+section.fullscreen-mode #chartsWrapper svg {
+  flex: 1 !important;
+  min-height: 350px !important;
+  max-height: 100% !important;
+}
+
+/* Adjust map controls in fullscreen */
+section.fullscreen-mode .map-controls {
+  background: #f1f3f5;
+  border-color: #dee2e6;
+}
+
+/* Hide top controls and insights in fullscreen for more space */
+section.fullscreen-mode #topControls {
+  margin-bottom: 15px;
+}
+
+section.fullscreen-mode .insight-box {
+  margin-top: 15px;
+}
+
+/* Find section fullscreen mode */
+section.fullscreen-mode .suitability-container {
+  grid-template-columns: 70% 30%;
+  height: calc(100vh - 200px);
+}
+
+section.fullscreen-mode .suitability-map {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.fullscreen-mode .suitability-map svg {
+  max-height: 100%;
+  width: auto;
+}
+
+section.fullscreen-mode .suitability-metrics {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Map Zoom Controls */
+.map-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 15px 0;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.map-control-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #495057;
+  transition: all 0.2s;
+}
+
+.map-control-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  color: #212529;
+  transform: translateY(-1px);
+}
+
+.map-control-btn:active {
+  transform: translateY(0);
+}
+
+.zoom-slider-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: 15px;
+  border-left: 1px solid #dee2e6;
+}
+
+#zoomSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #dee2e6;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+#zoomSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0d6efd;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#zoomSlider::-webkit-slider-thumb:hover {
+  background: #0b5ed7;
+  transform: scale(1.1);
+}
+
+#zoomSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0d6efd;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+#zoomSlider::-moz-range-thumb:hover {
+  background: #0b5ed7;
+  transform: scale(1.1);
+}
+
+#zoomLevel {
+  min-width: 45px;
+  text-align: right;
+  font-weight: 600;
+  color: #495057;
+}
+
+/* Map cursor style when draggable */
+#mapSvg {
+  cursor: grab;
+  user-select: none;
+}
+
+#mapSvg:active {
+  cursor: grabbing;
+}
+
+#mapWrapper {
+  position: relative;
+}
+
+/* Map hint overlay */
+.map-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#mapWrapper:hover .map-hint {
+  opacity: 1;
+}
+
 /* Chart Titles */
 .chart-title {
-  font-size: 14px;
-  font-weight: bold;
-  margin: 10px 0 5px;
-  text-align: center;
-  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  text-align: left;
+  color: #2c3e50;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e9ecef;
+  transition: all 0.3s;
+}
+
+section.fullscreen-mode .chart-title {
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 /* Insight Box */

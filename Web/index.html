@@ -77,12 +77,18 @@
         </section>
 
         <!-- 区域对比部分 -->
-        <section id="compare" style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;">
+        <section id="compare"
+          style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;position:relative;">
           <div class="section-title">
             <h2>Compare Across boroughs</h2>
             <p>Explore London's property market with our interactive map. Hover over each borough to access key
               statistics on average house prices and rents.</p>
           </div>
+
+          <!-- Fullscreen Button -->
+          <button id="compareFullscreenBtn" class="fullscreen-btn" title="Toggle Fullscreen">
+            <i class="ri-fullscreen-line"></i>
+          </button>
 
           <!-- TOP CONTROLS ROW (FULL WIDTH) -->
           <div id="topControls">
@@ -112,17 +118,48 @@
           <div id="visualSection">
             <div id="mapWrapper">
               <h3 class="chart-title">London House Market Overview by Borough</h3>
-              <svg id="mapSvg" width="800" height="600"></svg>
+
+              <!-- Map Zoom Controls -->
+              <div class="map-controls">
+                <button id="zoomInBtn" class="map-control-btn" title="Zoom In">
+                  <i class="ri-zoom-in-line"></i>
+                </button>
+                <button id="zoomOutBtn" class="map-control-btn" title="Zoom Out">
+                  <i class="ri-zoom-out-line"></i>
+                </button>
+                <button id="resetZoomBtn" class="map-control-btn" title="Reset View">
+                  <i class="ri-focus-3-line"></i>
+                </button>
+                <div class="zoom-slider-container">
+                  <label for="zoomSlider" style="font-size: 12px; margin-right: 8px;">Zoom:</label>
+                  <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="width: 120px;">
+                  <span id="zoomLevel" style="font-size: 12px; margin-left: 8px;">100%</span>
+                </div>
+              </div>
+
+              <svg id="mapSvg" width="100%" height="600" viewBox="0 0 800 600"
+                preserveAspectRatio="xMidYMid meet"></svg>
+
+              <!-- Map interaction hint -->
+              <div class="map-hint">
+                <i class="ri-information-line"></i> Drag to pan • Scroll to zoom
+              </div>
             </div>
 
             <div id="chartsWrapper">
               <!-- LINE CHART -->
-              <h3 class="chart-title">Long-term Trends in London's Housing Market</h3>
-              <svg id="lineChart" width="800" height="300"></svg>
+              <div class="chart-container">
+                <h3 class="chart-title">Long-term Trends in London's Housing Market</h3>
+                <svg id="lineChart" width="100%" height="450" viewBox="0 0 800 450"
+                  preserveAspectRatio="xMidYMid meet"></svg>
+              </div>
 
               <!-- RANK CHART -->
-              <h3 class="chart-title">Borough Ranking Over Time (1 = Highest Price / Volume)</h3>
-              <svg id="rankChart" width="800" height="300"></svg>
+              <div class="chart-container">
+                <h3 class="chart-title">Borough Ranking Over Time (1 = Highest Price / Volume)</h3>
+                <svg id="rankChart" width="100%" height="500" viewBox="0 0 800 500"
+                  preserveAspectRatio="xMidYMid meet"></svg>
+              </div>
             </div>
           </div>
 
@@ -139,11 +176,17 @@
             National Statistics</p>
         </section>
         <!-- 理想社区查找板块 -->
-        <section id="find" style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;">
+        <section id="find"
+          style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;position:relative;">
           <div class="section-title">
             <h2>Find your ideal neighborhoods</h2>
             <p>Adjust the sliders to match your priorities and find the perfect London neighborhood.</p>
           </div>
+
+          <!-- Fullscreen Button -->
+          <button id="findFullscreenBtn" class="fullscreen-btn" title="Toggle Fullscreen">
+            <i class="ri-fullscreen-line"></i>
+          </button>
 
           <div class="suitability-container">
             <!-- 左侧地图区域 -->
