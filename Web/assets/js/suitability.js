@@ -4,7 +4,7 @@
 (function () {
     // API Configuration
     const API_BASE = 'http://localhost:3000/api/data';
-    
+
     const svg = d3.select(".suitability-map svg");
     const tooltip = d3.select(".suitability-tooltip");
 
@@ -253,9 +253,9 @@
         });
 
     })
-    .catch(err => {
-        console.error("Error loading TopoJSON:", err);
-        alert("Failed to load map data for suitability analysis. Please ensure the backend server is running.");
-    });
+        .catch(err => {
+            console.error("Error loading TopoJSON:", err);
+            alert("Failed to load map data for suitability analysis. Please ensure the backend server is running.");
+        });
 
 })();

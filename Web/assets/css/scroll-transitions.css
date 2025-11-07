@@ -1,0 +1,644 @@
+/* Scroll-driven Section Transitions - True Full-screen Breakout */
+/* 真正突破section限制的全屏滚动效果 */
+
+/* 过渡section容器 */
+.transition-section {
+    position: relative;
+    min-height: 300vh; /* 提供滚动空间 */
+}
+
+/* Section内部sticky容器 */
+.transition-section .section-sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: visible; /* 允许内容溢出 */
+}
+
+/* Section内容容器 */
+.transition-section .section-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+/* 全屏突破容器 - 使用fixed定位真正突破section限制 */
+.fullscreen-breakout {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--neutral) !important;
+    z-index: 1000 !important;
+    overflow: hidden !important;
+}
+
+/* 隐藏原section内容,只显示突破的全屏版本 */
+.transition-section .section-content.has-breakout > *:not(.fullscreen-breakout) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Compare section 全屏布局 - 响应式Grid */
+.compare-fullscreen-layout {
+    display: grid;
+    grid-template-columns: minmax(500px, 55%) minmax(400px, 45%);
+    grid-template-rows: auto minmax(280px, 35%) minmax(320px, 1fr);
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 控制栏区域 - 横跨顶部 */
+.compare-fullscreen-layout .controls-area {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    padding: 15px 30px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.95) 100%);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 80px;
+    max-height: 120px;
+}
+
+/* 地图区域 - 左侧两行 */
+.compare-fullscreen-layout .map-area {
+    grid-column: 1;
+    grid-row: 2 / 4;
+    padding: 25px;
+    border-right: 2px solid rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(250,250,250,0.95) 100%);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0; /* 允许flex子元素收缩 */
+}
+
+.compare-fullscreen-layout .map-area .chart-title {
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+    flex-shrink: 0;
+}
+
+.compare-fullscreen-layout .map-area > div:not(.chart-title):not(.map-controls) {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* 图表区域 - 右侧分两行 */
+.compare-fullscreen-layout .chart-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.compare-fullscreen-layout .chart-top {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 20px 25px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+    background: rgba(248, 249, 250, 0.95);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.compare-fullscreen-layout .chart-bottom {
+    grid-column: 2;
+    grid-row: 3;
+    padding: 25px;
+    background: rgba(253, 253, 253, 0.95);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* 图表容器内部响应式 */
+.compare-fullscreen-layout .chart-top .chart-container,
+.compare-fullscreen-layout .chart-bottom .chart-container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.compare-fullscreen-layout .chart-top .chart-container > div,
+.compare-fullscreen-layout .chart-bottom .chart-container > div {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.compare-fullscreen-layout .chart-title {
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    flex-shrink: 0;
+}
+
+/* Find section 全屏布局 - 响应式优化 */
+.find-fullscreen-layout {
+    display: grid;
+    grid-template-columns: minmax(550px, 58%) minmax(380px, 42%);
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.find-fullscreen-layout .map-area {
+    padding: 35px 40px;
+    border-right: 2px solid rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(250,250,252,0.96) 100%);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.find-fullscreen-layout .map-area h3,
+.find-fullscreen-layout .map-area .chart-title {
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--primary);
+    flex-shrink: 0;
+    letter-spacing: -0.5px;
+}
+
+.find-fullscreen-layout .map-area svg {
+    flex: 1;
+    min-height: 0;
+}
+
+.find-fullscreen-layout .metrics-area {
+    padding: 35px 40px;
+    background: linear-gradient(180deg, rgba(248, 249, 252, 0.98) 0%, rgba(253, 253, 255, 0.96) 100%);
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* 美化metrics区域 */
+.find-fullscreen-layout .metrics-area h3 {
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--primary);
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary);
+    letter-spacing: -0.3px;
+}
+
+.find-fullscreen-layout .metrics-area .metric-group {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.find-fullscreen-layout .metrics-area .metric-group:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.find-fullscreen-layout .metrics-area .metric-group h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: var(--text-dark);
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.find-fullscreen-layout .metrics-area .metric-item {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.find-fullscreen-layout .metrics-area .metric-item:last-child {
+    border-bottom: none;
+}
+
+.find-fullscreen-layout .metrics-area .metric-item label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.find-fullscreen-layout .metrics-area .metric-item input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.find-fullscreen-layout .metrics-area .metric-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.find-fullscreen-layout .metrics-area .metric-item input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.find-fullscreen-layout .metrics-area .metric-item input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.find-fullscreen-layout .metrics-area .metric-item input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 响应式断点 - 较小屏幕 */
+@media (max-width: 1600px) {
+    .compare-fullscreen-layout {
+        grid-template-columns: minmax(450px, 52%) minmax(380px, 48%);
+        grid-template-rows: auto minmax(250px, 32%) minmax(300px, 1fr);
+    }
+    
+    .compare-fullscreen-layout .controls-area {
+        padding: 12px 25px;
+    }
+    
+    .compare-fullscreen-layout .map-area,
+    .compare-fullscreen-layout .chart-top,
+    .compare-fullscreen-layout .chart-bottom {
+        padding: 20px;
+    }
+    
+    .find-fullscreen-layout {
+        grid-template-columns: minmax(500px, 56%) minmax(350px, 44%);
+    }
+    
+    .find-fullscreen-layout .map-area,
+    .find-fullscreen-layout .metrics-area {
+        padding: 25px 30px;
+    }
+    
+    .find-fullscreen-layout .metrics-area .metric-group {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .compare-fullscreen-layout {
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto minmax(220px, 30%) minmax(280px, 1fr);
+    }
+    
+    .find-fullscreen-layout {
+        grid-template-columns: 55% 45%;
+    }
+    
+    .compare-fullscreen-layout .map-area,
+    .compare-fullscreen-layout .chart-top,
+    .compare-fullscreen-layout .chart-bottom,
+    .find-fullscreen-layout .map-area,
+    .find-fullscreen-layout .metrics-area {
+        padding: 18px;
+    }
+    
+    .find-fullscreen-layout .metrics-area .metric-group {
+        padding: 14px;
+        margin-bottom: 14px;
+    }
+}
+
+/* 超大屏幕优化 */
+@media (min-width: 1920px) {
+    .compare-fullscreen-layout {
+        grid-template-rows: auto minmax(320px, 38%) minmax(380px, 1fr);
+    }
+    
+    .compare-fullscreen-layout .controls-area {
+        padding: 20px 40px;
+    }
+    
+    .compare-fullscreen-layout .map-area,
+    .compare-fullscreen-layout .chart-top,
+    .compare-fullscreen-layout .chart-bottom {
+        padding: 35px;
+    }
+    
+    .find-fullscreen-layout {
+        grid-template-columns: minmax(600px, 60%) minmax(400px, 40%);
+    }
+    
+    .find-fullscreen-layout .map-area,
+    .find-fullscreen-layout .metrics-area {
+        padding: 40px 50px;
+    }
+    
+    .find-fullscreen-layout .metrics-area .metric-group {
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+}
+
+/* 全屏模式下的图表容器优化 */
+.fullscreen-breakout .chart-container {
+    width: 100%;
+    height: 100%;
+    min-height: 0 !important;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.fullscreen-breakout .chart-container .chart-title {
+    flex-shrink: 0;
+    margin-bottom: 12px;
+}
+
+.fullscreen-breakout .chart-container > div:not(.chart-title) {
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+}
+
+/* 确保SVG在全屏模式下正确缩放 */
+.fullscreen-breakout svg {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 地图SVG特殊处理 */
+.fullscreen-breakout .map-area svg {
+    flex: 1;
+    min-height: 0;
+}
+
+/* 图表区域的SVG */
+.fullscreen-breakout .chart-top svg,
+.fullscreen-breakout .chart-bottom svg {
+    flex: 1;
+    min-height: 0;
+}
+
+/* 渐进式动画类 */
+.fullscreen-breakout.stage-0 {
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none; /* 防止交互 */
+}
+
+.fullscreen-breakout.stage-1 {
+    transform: scale(0.98);
+    opacity: 0.5;
+}
+
+.fullscreen-breakout.stage-2 {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* 退出动画 - 快速淡出 */
+.fullscreen-breakout.exiting {
+    animation: fadeOutBreakout 0.4s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes fadeOutBreakout {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+}
+
+/* 子元素渐进淡入 */
+.fullscreen-breakout .controls-area,
+.fullscreen-breakout .map-area,
+.fullscreen-breakout .chart-top,
+.fullscreen-breakout .chart-bottom,
+.fullscreen-breakout .metrics-area {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fullscreen-breakout.stage-2 .controls-area {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.05s;
+}
+
+.fullscreen-breakout.stage-2 .map-area {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+.fullscreen-breakout.stage-2 .chart-top {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.fullscreen-breakout.stage-2 .chart-bottom {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.3s;
+}
+
+.fullscreen-breakout.stage-2 .metrics-area {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+/* 全屏模式下的控制栏样式优化 */
+.fullscreen-breakout .controls-area #topControls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fullscreen-breakout .controls-area #categoryContainer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* 优化类别按钮大小 */
+.fullscreen-breakout .controls-area #categoryContainer button {
+    padding: 6px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.fullscreen-breakout .controls-area #timeControls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+}
+
+.fullscreen-breakout .controls-area #timeControls #playPauseBtn {
+    padding: 6px 16px;
+    font-size: 13px;
+    border-radius: 6px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.fullscreen-breakout .controls-area #timeControls #playPauseBtn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.fullscreen-breakout .controls-area #timeControls #dateSlider {
+    flex: 1;
+    height: 5px;
+    min-width: 150px;
+}
+
+.fullscreen-breakout .controls-area #timeControls #dateLabel {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-dark);
+    min-width: 110px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* 响应式控制栏 */
+@media (max-width: 1600px) {
+    .fullscreen-breakout .controls-area #topControls {
+        gap: 8px;
+    }
+    
+    .fullscreen-breakout .controls-area #categoryContainer button {
+        padding: 5px 12px;
+        font-size: 12px;
+    }
+    
+    .fullscreen-breakout .controls-area #timeControls {
+        gap: 10px;
+    }
+    
+    .fullscreen-breakout .controls-area #timeControls #playPauseBtn {
+        padding: 5px 14px;
+        font-size: 12px;
+    }
+    
+    .fullscreen-breakout .controls-area #timeControls #dateLabel {
+        font-size: 13px;
+        min-width: 100px;
+    }
+}
+
+/* 调试面板 */
+.scroll-debug {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 11px;
+    z-index: 9999;
+    max-width: 280px;
+    backdrop-filter: blur(10px);
+}
+
+.scroll-debug.active {
+    display: block;
+}
+
+.scroll-debug .debug-item {
+    margin: 4px 0;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+}
+
+.scroll-debug .debug-item:last-child {
+    border-bottom: none;
+}
+
+.scroll-debug .debug-label {
+    color: #999;
+}
+
+.scroll-debug .debug-value {
+    color: #0f0;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.scroll-debug .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    margin: 8px 0 4px;
+    overflow: hidden;
+}
+
+.scroll-debug .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #00ffff);
+    transition: width 0.1s linear;
+    border-radius: 2px;
+}
+
+/* 性能优化 */
+.fullscreen-breakout {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform: translateZ(0);
+}
+
+
