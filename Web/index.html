@@ -15,8 +15,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- D3 and TopoJSON for map -->
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+
+  <!-- Remix Icon CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
 
   <!-- 引入本地样式 -->
   <link rel="stylesheet" href="assets/css/style.css">
@@ -80,16 +83,60 @@
             <p>Explore London's property market with our interactive map. Hover over each borough to access key
               statistics on average house prices and rents.</p>
           </div>
-          <div class="map-container">
-            <svg width="960" height="600"></svg>
-            <div class="tooltip"></div>
-            <div id="sliderContainer">
+
+          <!-- TOP CONTROLS ROW (FULL WIDTH) -->
+          <div id="topControls">
+            <div id="categoryContainer" aria-label="Data category selector"></div>
+
+            <!-- Time Controls below the category buttons -->
+            <div id="timeControls">
+              <button id="playPauseBtn" aria-label="Play/Pause animation">Play</button>
               <input type="range" id="dateSlider" min="0" max="0" value="0">
               <span id="dateLabel"></span>
+
+              <!-- Hidden category select for syncing within JS -->
+              <select id="categorySelect" style="display:none;">
+                <option value="Average">Average</option>
+                <option value="Detached">Detached</option>
+                <option value="SemiDetached">Semi-Detached</option>
+                <option value="Terraced">Terraced</option>
+                <option value="Flat">Flat</option>
+                <option value="Cash">Cash</option>
+                <option value="Mortgage">Mortgage</option>
+                <option value="SalesVolume">Sales Volume</option>
+              </select>
             </div>
           </div>
-          <p style="text-align:center;color:var(--text-light);font-style:italic;">Source: Office for National Statistics
-          </p>
+
+          <!-- MAP AND CHARTS SECTION -->
+          <div id="visualSection">
+            <div id="mapWrapper">
+              <h3 class="chart-title">London House Market Overview by Borough</h3>
+              <svg id="mapSvg" width="800" height="600"></svg>
+            </div>
+
+            <div id="chartsWrapper">
+              <!-- LINE CHART -->
+              <h3 class="chart-title">Long-term Trends in London's Housing Market</h3>
+              <svg id="lineChart" width="800" height="300"></svg>
+
+              <!-- RANK CHART -->
+              <h3 class="chart-title">Borough Ranking Over Time (1 = Highest Price / Volume)</h3>
+              <svg id="rankChart" width="800" height="300"></svg>
+            </div>
+          </div>
+
+          <!-- INSIGHT SECTION -->
+          <div id="insightContainer" class="insight-box">
+            <h3 class="insight-title">What This Data Tells Us</h3>
+            <p id="insightText"></p>
+          </div>
+
+          <!-- Tooltip for hover interaction -->
+          <div class="tooltip"></div>
+
+          <p style="text-align:center;color:var(--text-light);font-style:italic;margin-top:20px;">Source: Office for
+            National Statistics</p>
         </section>
         <!-- 理想社区查找板块 -->
         <section id="find" style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;">
@@ -121,7 +168,7 @@
                     <label style="font-size:14px; color:var(--text-dark);">Commute time to job hubs</label>
                     <span id="commuteValue" style="font-size:14px; font-weight:600;">30 min</span>
                   </div>
-                  <input type="range" min="0" max="60" value="30" class="preference-slider"
+                  <input type="range" id="commuteSlider" min="0" max="60" value="30" class="preference-slider"
                     style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
                     oninput="document.getElementById('commuteValue').textContent = this.value + ' min'">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
@@ -136,7 +183,7 @@
                     <label style="font-size:14px; color:var(--text-dark);">Transport reliability</label>
                     <span id="transportValue" style="font-size:14px; font-weight:600;">70%</span>
                   </div>
-                  <input type="range" min="0" max="100" value="70" class="preference-slider"
+                  <input type="range" id="transportSlider" min="0" max="100" value="70" class="preference-slider"
                     style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
                     oninput="document.getElementById('transportValue').textContent = this.value + '%'">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
@@ -156,7 +203,7 @@
                     <label style="font-size:14px; color:var(--text-dark);">Access to large parks</label>
                     <span id="parksValue" style="font-size:14px; font-weight:600;">80%</span>
                   </div>
-                  <input type="range" min="0" max="100" value="80" class="preference-slider"
+                  <input type="range" id="parksSlider" min="0" max="100" value="80" class="preference-slider"
                     style="width:100%; -webkit-appearance:none; appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
                     oninput="document.getElementById('parksValue').textContent = this.value + '%'">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
@@ -171,7 +218,7 @@
                     <label style="font-size:14px; color:var(--text-dark);">Air quality</label>
                     <span id="airValue" style="font-size:14px; font-weight:600;">60%</span>
                   </div>
-                  <input type="range" min="0" max="100" value="60" class="preference-slider"
+                  <input type="range" id="airSlider" min="0" max="100" value="60" class="preference-slider"
                     style="width:100%; -webkit-appearance:none; appearance:none;height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
                     oninput="document.getElementById('airValue').textContent = this.value + '%'">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
@@ -191,9 +238,9 @@
                     <label style="font-size:14px; color:var(--text-dark);">Ofsted school ratings</label>
                     <span id="schoolValue" style="font-size:14px; font-weight:600;">4</span>
                   </div>
-                  <input type="range" min="1.00" max="5.00" value="4.00" class="preference-slider"
+                  <input type="range" id="schoolSlider" min="1.00" max="5.00" value="4.00" step="0.1" class="preference-slider"
                     style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                    oninput="document.getElementById('schoolValue').textContent = this.value">
+                    oninput="document.getElementById('schoolValue').textContent = parseFloat(this.value).toFixed(1)">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
                     <span>Lower rated</span>
                     <span>Highly rated</span>
@@ -206,7 +253,7 @@
                     <label style="font-size:14px; color:var(--text-dark);">Cultural diversity</label>
                     <span id="diversityValue" style="font-size:14px; font-weight:600;">90%</span>
                   </div>
-                  <input type="range" min="0" max="100" value="90" class="preference-slider"
+                  <input type="range" id="diversitySlider" min="0" max="100" value="90" class="preference-slider"
                     style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
                     oninput="document.getElementById('diversityValue').textContent = this.value + '%'">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
@@ -788,6 +835,7 @@
   <!-- 引入本地脚本 -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/map.js"></script>
+  <script src="assets/js/suitability.js"></script>
 </body>
 
 </html>
