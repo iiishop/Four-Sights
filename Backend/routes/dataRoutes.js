@@ -437,24 +437,121 @@ router.get('/housing', (req, res) => {
  *       500:
  *         description: Failed to load borough data | 加载行政区数据失败
  */
-// API Endpoint 3: 提供行政区数据
-router.get('/boroughs', (req, res) => {
-    const filePath = path.join(__dirname, '../data', 'boroughs-data.json');
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading boroughs-data.json:', err);
-            return res.status(500).json({ error: 'Failed to load boroughs data' });
-        }
+// 添加borough数据缓存
+let boroughsCache = null;
+let boroughsCacheTime = null;
+let boroughsIndexMap = null; // 新增: slug索引Map,加速单个查询
+const BOROUGH_CACHE_DURATION = 5 * 60 * 1000; // 5分钟缓存
 
-        try {
-            const jsonData = JSON.parse(data);
-            res.json(jsonData);
-        } catch (parseErr) {
-            console.error('Error parsing JSON:', parseErr);
-            res.status(500).json({ error: 'Invalid JSON format' });
-        }
+// 加载并缓存borough数据的辅助函数
+function loadBoroughsData() {
+    const now = Date.now();
+
+    // 如果缓存有效,直接返回
+    if (boroughsCache && boroughsCacheTime && (now - boroughsCacheTime < BOROUGH_CACHE_DURATION)) {
+        return Promise.resolve(boroughsCache);
+    }
+
+    // 否则重新加载
+    return new Promise((resolve, reject) => {
+        const filePath = path.join(__dirname, '../data', 'boroughs-data.json');
+
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            try {
+                const jsonData = JSON.parse(data);
+                boroughsCache = jsonData;
+                boroughsCacheTime = now;
+
+                // 创建slug索引Map,加速查找
+                boroughsIndexMap = new Map();
+                jsonData.forEach(borough => {
+                    boroughsIndexMap.set(borough.slug, borough);
+                });
+
+                console.log(`📦 Borough data cached: ${jsonData.length} boroughs loaded`);
+                resolve(jsonData);
+            } catch (parseErr) {
+                reject(parseErr);
+            }
+        });
     });
+}
+
+// API Endpoint 3: 提供行政区数据
+router.get('/boroughs', async (req, res) => {
+    try {
+        const boroughs = await loadBoroughsData();
+        res.json(boroughs);
+    } catch (err) {
+        console.error('Error loading boroughs data:', err);
+        res.status(500).json({ error: 'Failed to load boroughs data' });
+    }
+});
+
+/**
+ * @swagger
+ * /api/data/boroughs/{slug}:
+ *   get:
+ *     summary: Get single borough detail | 获取单个行政区详情
+ *     description: Returns detailed information for a specific borough by slug | 根据slug返回特定行政区的详细信息
+ *     tags: [Static Data]
+ *     parameters:
+ *       - in: path
+ *         name: slug
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Borough slug (e.g., 'barking-and-dagenham')
+ *     responses:
+ *       200:
+ *         description: Borough data retrieved successfully | 成功获取行政区数据
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                 slug:
+ *                   type: string
+ *                 location:
+ *                   type: string
+ *                 history:
+ *                   type: string
+ *                 living:
+ *                   type: string
+ *       404:
+ *         description: Borough not found | 未找到该行政区
+ *       500:
+ *         description: Failed to load borough data | 加载行政区数据失败
+ */
+router.get('/boroughs/:slug', async (req, res) => {
+    const { slug } = req.params;
+
+    try {
+        // 先加载数据(如果缓存有效会直接返回)
+        await loadBoroughsData();
+
+        // 使用Map查找,O(1)时间复杂度,比Array.find()的O(n)快
+        const borough = boroughsIndexMap.get(slug);
+
+        if (!borough) {
+            return res.status(404).json({ error: 'Borough not found' });
+        }
+
+        // 设置缓存头,提升性能
+        res.set('Cache-Control', 'public, max-age=300'); // 5分钟浏览器缓存
+        res.json(borough);
+    } catch (err) {
+        console.error('Error loading borough data:', err);
+        res.status(500).json({ error: 'Failed to load borough data' });
+    }
 });
 
 /**

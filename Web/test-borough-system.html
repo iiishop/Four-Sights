@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borough系统测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-section h2 {
+            color: #0D3B34;
+            margin-top: 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .test-item {
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #0D3B34;
+            background: #f8f9fa;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        button {
+            background: #0D3B34;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #14554A;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Borough系统架构测试</h1>
+
+    <div class="test-section">
+        <h2>📋 系统架构说明</h2>
+        <div class="test-item">
+            <strong>1. Index页面 (boroughs.js)</strong><br>
+            - 硬编码32个borough的基本信息(name, slug, description, imageId)<br>
+            - 用于前端卡片展示<br>
+            - 点击跳转到详情页
+        </div>
+        <div class="test-item">
+            <strong>2. 详情页面 (borough-detail.html)</strong><br>
+            - 从URL获取slug参数<br>
+            - 调用后端API获取完整数据<br>
+            - 动态渲染location, history, living
+        </div>
+        <div class="test-item">
+            <strong>3. 后端API (Express + 缓存)</strong><br>
+            - GET /api/data/boroughs - 获取所有31个boroughs<br>
+            - GET /api/data/boroughs/:slug - 获取单个borough<br>
+            - 内存缓存(5分钟) + Map索引(O(1)查找)
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 API测试</h2>
+        <button onclick="testGetAllBoroughs()">测试: 获取所有Boroughs</button>
+        <button onclick="testGetSingleBorough('barking-and-dagenham')">测试: 获取Barking and Dagenham</button>
+        <button onclick="testGetSingleBorough('camden')">测试: 获取Camden</button>
+        <button onclick="testGetSingleBorough('not-exist')">测试: 不存在的Borough</button>
+        <button onclick="testPerformance()">性能测试</button>
+
+        <div id="test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 测试结果统计</h2>
+        <div id="stats">
+            <p>点击上方按钮开始测试...</p>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api/data';
+        let testResults = [];
+
+        function addResult(name, status, details, time) {
+            testResults.push({ name, status, details, time });
+            displayResults();
+        }
+
+        function displayResults() {
+            const container = document.getElementById('test-results');
+            const html = testResults.map((result, index) => `
+                <div class="test-item">
+                    <span class="status ${result.status}">${result.status.toUpperCase()}</span>
+                    <strong>${result.name}</strong>
+                    ${result.time ? `<span style="color: #666; margin-left: 10px;">(${result.time}ms)</span>` : ''}
+                    <pre>${JSON.stringify(result.details, null, 2)}</pre>
+                </div>
+            `).join('');
+            container.innerHTML = html;
+
+            // 更新统计
+            const successCount = testResults.filter(r => r.status === 'success').length;
+            const errorCount = testResults.filter(r => r.status === 'error').length;
+            const avgTime = testResults.reduce((sum, r) => sum + (r.time || 0), 0) / testResults.length;
+
+            document.getElementById('stats').innerHTML = `
+                <p>✅ 成功: ${successCount} | ❌ 失败: ${errorCount} | 平均响应: ${avgTime.toFixed(2)}ms</p>
+            `;
+        }
+
+        async function testGetAllBoroughs() {
+            const start = Date.now();
+            try {
+                const response = await fetch(`${API_BASE}/boroughs`);
+                const time = Date.now() - start;
+
+                if (response.ok) {
+                    const data = await response.json();
+                    addResult('获取所有Boroughs', 'success', {
+                        count: data.length,
+                        sample: data.slice(0, 2).map(b => ({ name: b.name, slug: b.slug }))
+                    }, time);
+                } else {
+                    addResult('获取所有Boroughs', 'error', { status: response.status }, time);
+                }
+            } catch (error) {
+                addResult('获取所有Boroughs', 'error', { message: error.message });
+            }
+        }
+
+        async function testGetSingleBorough(slug) {
+            const start = Date.now();
+            try {
+                const response = await fetch(`${API_BASE}/boroughs/${slug}`);
+                const time = Date.now() - start;
+
+                if (response.ok) {
+                    const data = await response.json();
+                    addResult(`获取 ${slug}`, 'success', {
+                        name: data.name,
+                        hasLocation: !!data.location,
+                        hasHistory: !!data.history,
+                        hasLiving: !!data.living
+                    }, time);
+                } else {
+                    const error = await response.json();
+                    addResult(`获取 ${slug}`, 'error', error, time);
+                }
+            } catch (error) {
+                addResult(`获取 ${slug}`, 'error', { message: error.message });
+            }
+        }
+
+        async function testPerformance() {
+            const slug = 'barking-and-dagenham';
+            const iterations = 10;
+            const times = [];
+
+            for (let i = 0; i < iterations; i++) {
+                const start = Date.now();
+                await fetch(`${API_BASE}/boroughs/${slug}`);
+                times.push(Date.now() - start);
+            }
+
+            const avgTime = times.reduce((a, b) => a + b, 0) / times.length;
+            const minTime = Math.min(...times);
+            const maxTime = Math.max(...times);
+
+            addResult('性能测试 (10次请求)', 'success', {
+                平均响应时间: `${avgTime.toFixed(2)}ms`,
+                最快: `${minTime}ms`,
+                最慢: `${maxTime}ms`,
+                说明: '第一次会读文件,后续使用缓存应该更快'
+            });
+        }
+    </script>
+</body>
+
+</html>
