@@ -10,38 +10,38 @@
         CACHE_KEY: 'borough_data_cache',
         CACHE_DURATION: 5 * 60 * 1000, // 5分钟
         IMAGE_MAP: {
-            'barking-and-dagenham': 1060,
-            'barnet': 1076,
-            'bexley': 1057,
-            'brent': 1058,
-            'bromley': 1031,
-            'camden': 1067,
-            'croydon': 1059,
-            'ealing': 1062,
-            'enfield': 1063,
-            'greenwich': 1064,
-            'hackney': 1065,
-            'hammersmith-and-fulham': 1066,
-            'haringey': 1068,
-            'harrow': 1069,
-            'havering': 1070,
-            'hillingdon': 1072,
-            'hounslow': 1073,
-            'islington': 1074,
-            'kensington-and-chelsea': 1075,
-            'kingston-upon-thames': 1077,
-            'lambeth': 1078,
-            'lewisham': 1079,
-            'merton': 1080,
-            'newham': 1081,
-            'redbridge': 1082,
-            'richmond-upon-thames': 1083,
-            'southwark': 1084,
-            'sutton': 1085,
-            'tower-hamlets': 1086,
-            'waltham-forest': 1087,
-            'wandsworth': 1088,
-            'westminster': 1061
+            'barking-and-dagenham': 101,
+            'barnet': 102,
+            'bexley': 103,
+            'brent': 104,
+            'bromley': 135,
+            'camden': 106,
+            'croydon': 107,
+            'ealing': 108,
+            'enfield': 109,
+            'greenwich': 110,
+            'hackney': 111,
+            'hammersmith-and-fulham': 112,
+            'haringey': 113,
+            'harrow': 114,
+            'havering': 115,
+            'hillingdon': 116,
+            'hounslow': 117,
+            'islington': 118,
+            'kensington-and-chelsea': 133,
+            'kingston-upon-thames': 120,
+            'lambeth': 121,
+            'lewisham': 122,
+            'merton': 123,
+            'newham': 124,
+            'redbridge': 125,
+            'richmond-upon-thames': 126,
+            'southwark': 127,
+            'sutton': 128,
+            'tower-hamlets': 129,
+            'waltham-forest': 130,
+            'wandsworth': 131,
+            'westminster': 132
         }
     };
 
@@ -139,10 +139,10 @@
         elements.history.textContent = borough.history;
         elements.living.textContent = borough.living;
 
-        // 更新图片
-        const imageId = CONFIG.IMAGE_MAP[borough.slug] || 1060;
+        // 使用固定的图片ID
+        const imageId = CONFIG.IMAGE_MAP[borough.slug] || 101;
         elements.image.src = `https://picsum.photos/id/${imageId}/600/400`;
-        elements.image.alt = `${borough.name} view`;
+        elements.image.alt = `${borough.name} landscape view`;
 
         // 隐藏加载状态,显示内容
         elements.loading.style.display = 'none';
