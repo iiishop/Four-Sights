@@ -151,14 +151,14 @@
             if (lineChart && chartTop) chartTop.appendChild(lineChart);
             if (rankChart && chartBottom) chartBottom.appendChild(rankChart);
         } else if (sectionId === 'find') {
-            const suitabilityMap = contentWrapper.querySelector('.suitability-map');
-            const suitabilityMetrics = contentWrapper.querySelector('.suitability-metrics');
+            const suitabilityLeft = contentWrapper.querySelector('.suitability-left');
+            const suitabilityMetricsRight = contentWrapper.querySelector('.suitability-metrics-right');
 
             const mapArea = layoutContainer.querySelector('.map-area');
             const metricsArea = layoutContainer.querySelector('.metrics-area');
 
-            if (suitabilityMap && mapArea) mapArea.appendChild(suitabilityMap);
-            if (suitabilityMetrics && metricsArea) metricsArea.appendChild(suitabilityMetrics);
+            if (suitabilityLeft && mapArea) mapArea.appendChild(suitabilityLeft);
+            if (suitabilityMetricsRight && metricsArea) metricsArea.appendChild(suitabilityMetricsRight);
         }
     }
 
@@ -219,27 +219,21 @@
                 contentWrapper.insertBefore(insightContainer, tooltip);
             }
         } else if (sectionId === 'find') {
-            const suitabilityMap = layoutContainer.querySelector('.suitability-map');
-            const suitabilityMetrics = layoutContainer.querySelector('.suitability-metrics');
+            const suitabilityLeft = layoutContainer.querySelector('.suitability-left');
+            const suitabilityMetricsRight = layoutContainer.querySelector('.suitability-metrics-right');
 
             // 找到或创建原始容器
             let suitabilityContainer = contentWrapper.querySelector('.suitability-container');
             if (!suitabilityContainer) {
                 suitabilityContainer = document.createElement('div');
                 suitabilityContainer.className = 'suitability-container';
-                // 插入到 fullscreen button 后面
-                const fullscreenBtn = contentWrapper.querySelector('#findFullscreenBtn');
-                if (fullscreenBtn && fullscreenBtn.nextSibling) {
-                    contentWrapper.insertBefore(suitabilityContainer, fullscreenBtn.nextSibling);
-                } else {
-                    contentWrapper.appendChild(suitabilityContainer);
-                }
+                contentWrapper.appendChild(suitabilityContainer);
             }
 
             // 清空并重建 suitability-container
             suitabilityContainer.innerHTML = '';
-            if (suitabilityMap) suitabilityContainer.appendChild(suitabilityMap);
-            if (suitabilityMetrics) suitabilityContainer.appendChild(suitabilityMetrics);
+            if (suitabilityLeft) suitabilityContainer.appendChild(suitabilityLeft);
+            if (suitabilityMetricsRight) suitabilityContainer.appendChild(suitabilityMetricsRight);
         }
 
         // 内容已经通过 appendChild 移回原位置

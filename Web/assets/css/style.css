@@ -444,20 +444,45 @@ footer {
 ========================================== */
 .suitability-container {
   display: grid;
-  grid-template-columns: 70% 30%; /* 增大地图区域占比 */
-  gap: 20px; /* 减少两部分间距 */
+  grid-template-columns: 65% 35%;
+  gap: 20px;
   position: relative;
+}
+
+.suitability-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .suitability-map {
   position: relative;
   background: white;
   border-radius: 8px;
-  padding: 15px; /* 减少内边距 */
+  padding: 15px;
   box-shadow: var(--shadow);
   width: 100%;
 }
 
+.suitability-metrics-bottom {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.suitability-metrics-right {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  max-height: fit-content;
+}
+
+/* 兼容旧的 class */
 .suitability-metrics {
   background: white;
   border-radius: 8px;
@@ -596,6 +621,15 @@ footer {
 
   .borough-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .suitability-container {
+    grid-template-columns: 1fr;
+  }
+
+  .suitability-metrics-bottom {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .suitability-map svg {
