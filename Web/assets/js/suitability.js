@@ -231,14 +231,17 @@
               <div>Supermarket: ${metrics.supermarket.toFixed(0)}</div>
             </div>
           `)
-                        .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 28) + "px");
+                        const [x, y] = d3.pointer(event, svg.node());
+tooltip
+    .style("left", (x + 20) + "px")
+    .style("top", (y + 20) + "px");
                 })
-                .on("mousemove", function (event) {
-                    tooltip
-                        .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-                })
+              .on("mousemove", function (event) {
+    const [x, y] = d3.pointer(event, svg.node());
+    tooltip
+        .style("left", (x + 20) + "px")
+        .style("top", (y + 20) + "px");
+})
                 .on("mouseout", function () {
                     d3.select(this)
                         .attr("stroke", "#fff")
