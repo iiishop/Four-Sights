@@ -39,11 +39,11 @@ app.use('/api/data', dataRoutes);
 
 // 提供静态文件服务 (前端文件)
 // 这会让 Express 托管 Web 文件夹中的所有静态资源
-app.use(express.static(path.join(__dirname, '../Web')));
+app.use(express.static(path.join(__dirname, '../Frontend')));
 
 // 根路径重定向到前端主页
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../Web', 'index.html'));
+    res.sendFile(path.join(__dirname, '../Frontend', 'index.html'));
 });
 
 // 404 错误处理
