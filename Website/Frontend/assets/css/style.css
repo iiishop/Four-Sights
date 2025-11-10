@@ -1,6 +1,4 @@
-/* ==========================================
-   基础重置与全局设置
-========================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -18,18 +16,14 @@ body {
   background-color: #fff;
 }
 
-/* 关键修改：大幅减少左右留白，增大内容区宽度 */
 .container {
   width: 100%;
-  max-width: 1600px; /* 进一步增大最大宽度 */
-  padding-left: 15px; /* 最小化左侧留白 */
-  padding-right: 15px; /* 最小化右侧留白 */
+  max-width: 1600px; 
+  padding-left: 15px; 
+  padding-right: 15px; 
   margin: 0 auto;
 }
 
-/* ==========================================
-   颜色变量
-========================================== */
 :root {
   --primary: #0D3B34;
   --secondary: #2A6B5F;
@@ -40,9 +34,7 @@ body {
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* ==========================================
-   头部样式
-========================================== */
+
 header {
   background: var(--primary);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -80,19 +72,13 @@ header {
   color: var(--accent);
 }
 
-/* ==========================================
-   主内容布局
-========================================== */
 .main-content {
   display: flex;
-  gap: 20px; /* 减少侧边栏与主内容间距 */
-  padding: 30px 0; /* 减少整体上下内边距 */
-  padding-top: 40px; /* 调整顶部距离 */
+  gap: 20px; 
+  padding: 30px 0; 
+  padding-top: 40px; 
 }
 
-/* ==========================================
-   侧边栏导航
-========================================== */
 .sidebar {
   width: 220px;
   flex-shrink: 0;
@@ -135,24 +121,20 @@ header {
   padding-left: 8px;
 }
 
-/* ==========================================
-   内容区域
-========================================== */
 .content {
   flex-grow: 1;
 }
 
-/* 英雄区：减少与引言的间距 */
 .hero {
   background: var(--neutral);
-  padding: 60px 0; /* 减少上下内边距 */
+  padding: 60px 0; 
   text-align: center;
-  margin-bottom: 15px; /* 大幅减少底部空白 */
+  margin-bottom: 15px; 
 }
 
 .hero h1 {
   font-size: 42px;
-  margin-bottom: 15px; /* 减少标题与副标题间距 */
+  margin-bottom: 15px;
   color: var(--primary);
 }
 
@@ -160,7 +142,7 @@ header {
   font-size: 20px;
   color: var(--text-light);
   max-width: 800px;
-  margin: 0 auto 20px; /* 减少副标题底部间距 */
+  margin: 0 auto 20px; 
 }
 
 .cta-buttons {
@@ -198,9 +180,8 @@ header {
   color: #fff;
 }
 
-/* 章节样式 */
 section {
-  padding: 30px 0; /* 减少章节上下间距 */
+  padding: 30px 0; 
 }
 
 .section-title {
@@ -218,19 +199,18 @@ section {
   max-width: 700px;
 }
 
-/* 地图容器：为大尺寸地图优化 */
 .map-container {
   background: white;
   border-radius: 8px;
-  padding: 20px; /* 减少内边距 */
+  padding: 20px; 
   margin-bottom: 20px;
   box-shadow: var(--shadow);
-  width: 100%; /* 确保占满容器宽度 */
+  width: 100%; 
 }
 
 .map-placeholder {
   background: var(--neutral);
-  height: 500px; /* 增加地图高度 */
+  height: 500px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,7 +219,7 @@ section {
   font-size: 18px;
 }
 
-/* 数据卡片网格 */
+
 .data-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -298,7 +278,7 @@ section {
   color: var(--primary);
 }
 
-/* 行政区卡片网格 */
+
 .borough-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -349,18 +329,16 @@ section {
   line-height: 1.5;
 }
 
-/* 引言部分 */
+
 #intro p {
-  font-size: 18px; /* 确保字体大小不变 */
+  font-size: 18px; 
   line-height: 1.8;
   color: var(--text-dark);
   margin-bottom: 20px;
-  max-width: 100%; /* 让引言占满宽度 */
+  max-width: 100%; 
 }
 
-/* ==========================================
-   页脚样式
-========================================== */
+
 footer {
   background: var(--primary);
   color: #fff;
@@ -407,12 +385,10 @@ footer {
   color: #adb5bd;
 }
 
-/* ==========================================
-   Map Styles
-========================================== */
+
 .map-container svg {
   width: 100%;
-  height: 550px; /* 增加地图默认高度 */
+  height: 550px; 
   border: 1px solid #ccc;
 }
 
@@ -439,9 +415,7 @@ footer {
   margin: 10px;
 }
 
-/* ==========================================
-   理想社区查找板块样式
-========================================== */
+
 .suitability-container {
   display: grid;
   grid-template-columns: 65% 35%;
@@ -482,7 +456,7 @@ footer {
   max-height: fit-content;
 }
 
-/* 兼容旧的 class */
+
 .suitability-metrics {
   background: white;
   border-radius: 8px;
@@ -543,9 +517,7 @@ footer {
   border-bottom: 3px solid var(--primary);
 }
 
-/* ==========================================
-   响应式适配
-========================================== */
+
 @media (max-width: 992px) {
   .main-content {
     flex-direction: column;
@@ -651,22 +623,18 @@ footer {
   }
 }
 
-/* ==========================================
-   Map Visualization Styles (from map project)
-========================================== */
 
-/* TOP CONTROLS (Category Menu + Time Slider) */
 #topControls {
   width: 100%;
   display: flex;
-  flex-direction: column; /* Stack vertically */
-  align-items: flex-start; /* Align to the left */
+  flex-direction: column; 
+  align-items: flex-start; 
   padding: 15px 20px;
   background: #fff;
   border: 1px solid #eee;
   border-radius: 8px;
   margin-bottom: 20px;
-  gap: 12px; /* Space between category and time controls */
+  gap: 12px;
 }
 
 /* CATEGORY BUTTONS */
@@ -708,7 +676,6 @@ footer {
   color: #fff;
 }
 
-/* TIME CONTROLS (Play/Pause button + Slider) */
 #timeControls {
   display: flex;
   align-items: center;
@@ -717,8 +684,8 @@ footer {
 }
 
 #dateSlider {
-  width: 50%;        /* Adjust this to control the maximum size horizontally */
-  max-width: 300px;  /* Optional: Adds a reasonable upper bound for large screens */
+  width: 50%;        
+  max-width: 300px;  
 }
 
 #playPauseBtn {
@@ -802,7 +769,7 @@ footer {
   }
 }
 
-/* Fullscreen mode styles (旧代码，已弃用 - 使用滚动驱动的全屏效果) */
+/* Fullscreen mode styles  */
 section.fullscreen-mode {
   position: fixed !important;
   top: 0 !important;

@@ -324,7 +324,6 @@ d3.json(`${API_BASE}/map/geojson`).then(topo => {
             const dateField = Object.keys(data[0]).find(key => key.includes('Date')) || 'Date';
             console.log('Date field name:', dateField);
 
-            // 使用时间戳去重日期
             const dateTimestamps = new Set();
             data.forEach(d => {
                 if (d.parsedDate) {

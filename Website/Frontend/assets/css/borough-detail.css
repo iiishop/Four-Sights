@@ -1,6 +1,5 @@
 /* Borough Detail Page Styles */
 
-/* 基础变量 */
 :root {
     --primary: #0D3B34;
     --primary-light: #14554A;
@@ -23,7 +22,6 @@ body {
     padding: 0 var(--spacing);
 }
 
-/* 页头样式 */
 header {
     padding: 25px 0;
     border-bottom: 1px solid var(--border-light);
@@ -41,7 +39,6 @@ header {
     opacity: 0.8;
 }
 
-/* 加载状态 */
 .loading {
     text-align: center;
     padding: 100px 20px;
@@ -70,7 +67,6 @@ header {
     color: #dc3545;
 }
 
-/* 头部区域 */
 .borough-header {
     padding: 50px 0;
     border-bottom: 1px solid var(--border-light);
@@ -113,7 +109,6 @@ header {
     line-height: 1.2;
 }
 
-/* 头部图片 */
 .header-image {
     width: 400px;
     height: 300px;
@@ -122,7 +117,6 @@ header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* 内容区域 */
 .main-content {
     padding: 20px 0;
 }
@@ -155,7 +149,6 @@ header {
     white-space: pre-wrap;
 }
 
-/* 页脚 */
 footer {
     background-color: var(--primary);
     padding: 50px 0;
@@ -169,7 +162,6 @@ footer {
     text-align: center;
 }
 
-/* 响应式 */
 @media (max-width: 900px) {
     .header-content-wrapper {
         flex-direction: column;

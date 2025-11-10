@@ -7,17 +7,14 @@
     <title id="page-title">Loading...</title>
     <meta name="description" id="page-description" content="Detailed guide to London borough">
 
-    <!-- 外部资源 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- 本地样式 -->
     <link rel="stylesheet" href="../assets/css/borough-detail.css">
 </head>
 
 <body>
-    <!-- 页头 -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -26,24 +23,20 @@
         </div>
     </header>
 
-    <!-- 加载状态 -->
     <div id="loading-state" class="loading">
         <div class="loading-spinner"></div>
         <p>Loading borough data...</p>
     </div>
 
-    <!-- 错误状态 -->
     <div id="error-state" class="error" style="display: none;">
         <h2>Error Loading Data</h2>
         <p id="error-message"></p>
         <a href="../index.html" style="color: var(--primary);">← Back to Home</a>
     </div>
 
-    <!-- 主内容区 -->
     <div class="container" id="main-container" style="display: none;">
         <div class="main-content">
             <div class="content">
-                <!-- 头部区域 - 地名与图片并排 -->
                 <div class="borough-header">
                     <div class="header-content-wrapper">
                         <div class="header-text">
@@ -52,13 +45,11 @@
                             </p>
                             <h1 id="borough-name">Loading...</h1>
                         </div>
-                        <!-- 图片位于地名正右方 -->
                         <img id="borough-image" src="https://picsum.photos/id/1060/600/400" alt="Borough view"
                             class="header-image">
                     </div>
                 </div>
 
-                <!-- 1. 位置信息板块 -->
                 <section class="section">
                     <div class="section-title">
                         <h2>The Location</h2>
@@ -68,7 +59,6 @@
                     </div>
                 </section>
 
-                <!-- 2. 历史板块 -->
                 <section class="section">
                     <div class="section-title">
                         <h2>The History</h2>
@@ -78,7 +68,6 @@
                     </div>
                 </section>
 
-                <!-- 3. 居住体验板块 -->
                 <section class="section">
                     <div class="section-title">
                         <h2>Living Here</h2>
@@ -91,14 +80,12 @@
         </div>
     </div>
 
-    <!-- 页脚（仅含logo） -->
     <footer>
         <div class="container">
             <div class="footer-logo">Four Sights</div>
         </div>
     </footer>
 
-    <!-- 引入优化的JavaScript -->
     <script src="../assets/js/borough-detail.js"></script>
 </body>
 
