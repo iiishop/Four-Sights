@@ -338,6 +338,13 @@ section {
   max-width: 100%; 
 }
 
+#about p {
+  font-size: 18px; 
+  line-height: 1.8;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  max-width: 100%; 
+}
 
 footer {
   background: var(--primary);
@@ -475,7 +482,6 @@ footer {
   color: var(--text-dark);
 }
 
-/* 滑块样式 */
 .preference-slider {
   width: 100%;
   height: 8px;
