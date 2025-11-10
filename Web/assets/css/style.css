@@ -1,0 +1,1179 @@
+/* ==========================================
+   基础重置与全局设置
+========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+}
+
+/* 关键修改：大幅减少左右留白，增大内容区宽度 */
+.container {
+  width: 100%;
+  max-width: 1600px; /* 进一步增大最大宽度 */
+  padding-left: 15px; /* 最小化左侧留白 */
+  padding-right: 15px; /* 最小化右侧留白 */
+  margin: 0 auto;
+}
+
+/* ==========================================
+   颜色变量
+========================================== */
+:root {
+  --primary: #0D3B34;
+  --secondary: #2A6B5F;
+  --accent: #38B09D;
+  --neutral: #F5F5F0;
+  --text-dark: #232F3E;
+  --text-light: #667580;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================
+   头部样式
+========================================== */
+header {
+  background: var(--primary);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.social-links a {
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================
+   主内容布局
+========================================== */
+.main-content {
+  display: flex;
+  gap: 20px; /* 减少侧边栏与主内容间距 */
+  padding: 30px 0; /* 减少整体上下内边距 */
+  padding-top: 40px; /* 调整顶部距离 */
+}
+
+/* ==========================================
+   侧边栏导航
+========================================== */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  padding-right: 15px;
+  border-right: 3px solid #e5e7eb;
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin: 14px 0;
+}
+
+.sidebar a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  padding: 4px 2px;
+  border-radius: 4px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.sidebar a:hover {
+  color: var(--primary);
+  background: var(--neutral);
+}
+
+.sidebar a.active {
+  color: var(--primary);
+  background: var(--primary/10);
+  border-left: 4px solid var(--primary);
+  padding-left: 8px;
+}
+
+/* ==========================================
+   内容区域
+========================================== */
+.content {
+  flex-grow: 1;
+}
+
+/* 英雄区：减少与引言的间距 */
+.hero {
+  background: var(--neutral);
+  padding: 60px 0; /* 减少上下内边距 */
+  text-align: center;
+  margin-bottom: 15px; /* 大幅减少底部空白 */
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 15px; /* 减少标题与副标题间距 */
+  color: var(--primary);
+}
+
+.hero p {
+  font-size: 20px;
+  color: var(--text-light);
+  max-width: 800px;
+  margin: 0 auto 20px; /* 减少副标题底部间距 */
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 25px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--secondary);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* 章节样式 */
+section {
+  padding: 30px 0; /* 减少章节上下间距 */
+}
+
+.section-title {
+  margin-bottom: 25px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.section-title p {
+  color: var(--text-light);
+  max-width: 700px;
+}
+
+/* 地图容器：为大尺寸地图优化 */
+.map-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px; /* 减少内边距 */
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  width: 100%; /* 确保占满容器宽度 */
+}
+
+.map-placeholder {
+  background: var(--neutral);
+  height: 500px; /* 增加地图高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: var(--text-light);
+  font-size: 18px;
+}
+
+/* 数据卡片网格 */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.data-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 25px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.data-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.data-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary/10);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.data-card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.data-list {
+  list-style: none;
+}
+
+.data-list li {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.data-list li:last-child {
+  border-bottom: none;
+}
+
+.rank {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* 行政区卡片网格 */
+.borough-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.borough-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.borough-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.borough-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.borough-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.borough-card-content {
+  padding: 15px;
+}
+
+.borough-card h3 {
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.borough-card p {
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 引言部分 */
+#intro p {
+  font-size: 18px; /* 确保字体大小不变 */
+  line-height: 1.8;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  max-width: 100%; /* 让引言占满宽度 */
+}
+
+/* ==========================================
+   页脚样式
+========================================== */
+footer {
+  background: var(--primary);
+  color: #fff;
+  padding: 60px 0 30px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #adb5bd;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+  text-align: center;
+  color: #adb5bd;
+}
+
+/* ==========================================
+   Map Styles
+========================================== */
+.map-container svg {
+  width: 100%;
+  height: 550px; /* 增加地图默认高度 */
+  border: 1px solid #ccc;
+}
+
+.boroughs path {
+  stroke: #fff;
+  stroke-width: 0.5;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1000;
+}
+
+#sliderContainer {
+  margin: 10px;
+}
+
+/* ==========================================
+   理想社区查找板块样式
+========================================== */
+.suitability-container {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  gap: 20px;
+  position: relative;
+}
+
+.suitability-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.suitability-map {
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: var(--shadow);
+  width: 100%;
+}
+
+.suitability-metrics-bottom {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.suitability-metrics-right {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  max-height: fit-content;
+}
+
+/* 兼容旧的 class */
+.suitability-metrics {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.metric-item {
+  margin-bottom: 15px;
+}
+
+.metric-item label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+/* 滑块样式 */
+.preference-slider {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.preference-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.preference-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+}
+
+.preference-slider::-webkit-slider-thumb:hover,
+.preference-slider::-moz-range-thumb:hover {
+  background: var(--secondary);
+}
+
+.tab-btn.active {
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+}
+
+/* ==========================================
+   响应式适配
+========================================== */
+@media (max-width: 992px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 3px solid #e5e7eb;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    max-height: none;
+    top: 0;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .sidebar li {
+    margin: 0;
+  }
+
+  .sidebar a {
+    padding: 8px 15px;
+  }
+
+  .sidebar a.active {
+    border-left: none;
+    border-bottom: 4px solid var(--primary);
+    padding-left: 2px;
+  }
+
+  .suitability-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .suitability-map {
+    order: 1;
+  }
+  
+  .suitability-metrics {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .social-links {
+    margin-top: 15px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+
+  .borough-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .suitability-container {
+    grid-template-columns: 1fr;
+  }
+
+  .suitability-metrics-bottom {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .suitability-map svg {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .borough-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .section-title h2 {
+    font-size: 24px;
+  }
+}
+
+/* ==========================================
+   Map Visualization Styles (from map project)
+========================================== */
+
+/* TOP CONTROLS (Category Menu + Time Slider) */
+#topControls {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Stack vertically */
+  align-items: flex-start; /* Align to the left */
+  padding: 15px 20px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  gap: 12px; /* Space between category and time controls */
+}
+
+/* CATEGORY BUTTONS */
+#categoryContainer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f8f8f8;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s, border-color .15s, transform .05s;
+}
+
+.category-btn:hover {
+  background: #eee;
+}
+
+.category-btn.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+
+.category-btn i {
+  font-size: 18px;
+}
+
+.category-btn.active i {
+  color: #fff;
+}
+
+/* TIME CONTROLS (Play/Pause button + Slider) */
+#timeControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+#dateSlider {
+  width: 50%;        /* Adjust this to control the maximum size horizontally */
+  max-width: 300px;  /* Optional: Adds a reasonable upper bound for large screens */
+}
+
+#playPauseBtn {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  transition: background .15s;
+}
+
+#playPauseBtn:hover {
+  background: #eee;
+}
+
+/* VISUALISATION SECTION (MAP & CHARTS) */
+#visualSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px 0;
+  width: 100%;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#mapWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+#chartsWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 450px;
+}
+
+#mapWrapper svg {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Ensure charts take full width of their wrapper */
+#chartsWrapper svg {
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 1200px) {
+  #chartsWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Fullscreen mode styles (旧代码，已弃用 - 使用滚动驱动的全屏效果) */
+section.fullscreen-mode {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 40px !important;
+  z-index: 9999 !important;
+  overflow-y: auto !important;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%) !important;
+  animation: fullscreenEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Fullscreen enter animation */
+@keyframes fullscreenEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Fullscreen exit animation */
+section.fullscreen-exit-animation {
+  animation: fullscreenExit 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fullscreenExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+}
+
+/* Compare section fullscreen mode - horizontal layout */
+section.fullscreen-mode #visualSection {
+  display: grid !important;
+  grid-template-columns: 50% 50% !important;
+  gap: 20px !important;
+  height: calc(100vh - 250px) !important;
+  max-width: 100%;
+  align-items: stretch;
+}
+
+section.fullscreen-mode #mapWrapper {
+  height: 100% !important;
+  max-height: 100%;
+  padding: 25px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+/* Slide animations for fullscreen mode */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+section.fullscreen-mode #mapWrapper svg {
+  height: 100% !important;
+  max-height: calc(100vh - 400px) !important;
+}
+
+section.fullscreen-mode #chartsWrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  height: 100% !important;
+  overflow-y: auto;
+  padding-right: 5px;
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+/* Custom scrollbar for fullscreen charts */
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar-track {
+  background: #f1f3f5;
+  border-radius: 4px;
+}
+
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar-thumb {
+  background: #adb5bd;
+  border-radius: 4px;
+}
+
+section.fullscreen-mode #chartsWrapper::-webkit-scrollbar-thumb:hover {
+  background: #868e96;
+}
+
+section.fullscreen-mode .chart-container {
+  flex: 1 !important;
+  min-height: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  padding: 25px !important;
+}
+
+section.fullscreen-mode #chartsWrapper svg {
+  flex: 1 !important;
+  min-height: 350px !important;
+  max-height: 100% !important;
+}
+
+/* Adjust map controls in fullscreen */
+section.fullscreen-mode .map-controls {
+  background: #f1f3f5;
+  border-color: #dee2e6;
+}
+
+/* Hide top controls and insights in fullscreen for more space */
+section.fullscreen-mode #topControls {
+  margin-bottom: 15px;
+}
+
+section.fullscreen-mode .insight-box {
+  margin-top: 15px;
+}
+
+/* Find section fullscreen mode */
+section.fullscreen-mode .suitability-container {
+  grid-template-columns: 70% 30%;
+  height: calc(100vh - 200px);
+}
+
+section.fullscreen-mode .suitability-map {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.fullscreen-mode .suitability-map svg {
+  max-height: 100%;
+  width: auto;
+}
+
+section.fullscreen-mode .suitability-metrics {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Map Zoom Controls */
+.map-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 15px 0;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.map-control-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #495057;
+  transition: all 0.2s;
+}
+
+.map-control-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  color: #212529;
+  transform: translateY(-1px);
+}
+
+.map-control-btn:active {
+  transform: translateY(0);
+}
+
+.zoom-slider-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: 15px;
+  border-left: 1px solid #dee2e6;
+}
+
+#zoomSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #dee2e6;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+#zoomSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0d6efd;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#zoomSlider::-webkit-slider-thumb:hover {
+  background: #0b5ed7;
+  transform: scale(1.1);
+}
+
+#zoomSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0d6efd;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+#zoomSlider::-moz-range-thumb:hover {
+  background: #0b5ed7;
+  transform: scale(1.1);
+}
+
+#zoomLevel {
+  min-width: 45px;
+  text-align: right;
+  font-weight: 600;
+  color: #495057;
+}
+
+/* Map cursor style when draggable */
+#mapSvg {
+  cursor: grab;
+  user-select: none;
+}
+
+#mapSvg:active {
+  cursor: grabbing;
+}
+
+#mapWrapper {
+  position: relative;
+}
+
+/* Map hint overlay */
+.map-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#mapWrapper:hover .map-hint {
+  opacity: 1;
+}
+
+/* Chart Titles */
+.chart-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  text-align: left;
+  color: #2c3e50;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e9ecef;
+  transition: all 0.3s;
+}
+
+section.fullscreen-mode .chart-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Insight Box */
+.insight-box {
+  width: calc(100% - 40px);
+  margin: 15px auto;
+  padding: 12px 16px;
+  background: #f9f9fb;
+  border-left: 4px solid #0d6efd;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  border-radius: 4px;
+  max-width: 1300px;
+}
+
+/* Insight Title */
+.insight-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+/* Tooltip for Hover Interaction - Enhanced */
+.tooltip {
+  position: absolute;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .1s;
+  z-index: 1000;
+}
+
+/* Suitability Tooltip */
+.suitability-tooltip {
+  position: absolute;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1000;
+  max-width: 250px;
+  line-height: 1.5;
+}
+
+/* Suitability Map Boroughs */
+.suitability-boroughs path {
+  transition: all 0.3s ease;
+}
+
+.suitability-boroughs path:hover {
+  opacity: 0.8;
+}

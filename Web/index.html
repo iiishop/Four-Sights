@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>London Borough Housing Market Analysis 2025</title>
+  <meta name="description"
+    content="Comprehensive analysis of London's housing market. Compare boroughs by house prices, rental growth, population, and key housing indicators.">
+
+  <!-- 引入外部资源 -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- D3 and TopoJSON for map -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+
+  <!-- Remix Icon CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- 引入本地样式 -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/scroll-transitions.css">
+</head>
+
+<body>
+  <!-- 页头 -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">Four Sights</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区 -->
+  <section class="hero">
+    <div class="container">
+      <h1>London borough Housing Market Analysis 2025</h1>
+      <p>A Comprehensive Guide to the Housing Markets Across London's 32 boroughs</p>
+    </div>
+  </section>
+
+  <!-- 主内容区 -->
+  <div class="container">
+    <div class="main-content">
+      <!-- 侧边栏导航 -->
+      <nav class="sidebar">
+        <ul>
+          <li><a href="#intro" class="active">Introduction</a></li>
+          <li><a href="#compare">Compare across boroughs</a></li>
+          <li><a href="#find">Find your ideal neighborhoods</a></li>
+          <li><a href="#top">Top performing boroughs</a></li>
+          <li><a href="#guides">Explore Area Guides</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+
+      <!-- 核心内容 -->
+      <div class="content">
+        <!-- 引言部分 -->
+        <section id="intro">
+          <div class="section-title">
+            <h2>Introduction</h2>
+          </div>
+          <p>Welcome to our London borough by borough report, providing an in-depth analysis of every London borough's
+            performance across key housing market indicators.</p>
+          <p>As a global hub for finance, history, culture, and education, London's enduring appeal continues to
+            captivate residents and investors alike.</p>
+          <p>This report takes a comprehensive look at London's boroughs, highlighting the unique characteristics that
+            make each one an attractive destination to live, work, and invest.</p>
+          <p>Through rigorous research and local market insight, we identify the key drivers of residential real estate
+            across London, empowering you to make informed decisions about buying or renting in this vibrant and diverse
+            city.</p>
+        </section>
+
+        <!-- 区域对比部分 -->
+        <section id="compare"
+          style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;position:relative;">
+          <div class="section-text-header">
+            <h2>Compare boroughs</h2>
+            <p>Explore London's property market with our interactive map. Hover over each borough to access key
+              statistics on average house prices and rents.</p>
+          </div>
+
+          <!-- TOP CONTROLS ROW (FULL WIDTH) -->
+          <div id="topControls">
+            <div id="categoryContainer" aria-label="Data category selector"></div>
+
+            <!-- Time Controls below the category buttons -->
+            <div id="timeControls">
+              <button id="playPauseBtn" aria-label="Play/Pause animation">Play</button>
+              <input type="range" id="dateSlider" min="0" max="0" value="0">
+              <span id="dateLabel"></span>
+
+              <!-- Hidden category select for syncing within JS -->
+              <select id="categorySelect" style="display:none;">
+                <option value="Average">Average</option>
+                <option value="Detached">Detached</option>
+                <option value="SemiDetached">Semi-Detached</option>
+                <option value="Terraced">Terraced</option>
+                <option value="Flat">Flat</option>
+                <option value="Cash">Cash</option>
+                <option value="Mortgage">Mortgage</option>
+                <option value="SalesVolume">Sales Volume</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- MAP AND CHARTS SECTION -->
+          <div id="visualSection">
+            <div id="mapWrapper">
+              <h3 class="chart-title">London House Market Overview by Borough</h3>
+
+              <!-- Map Zoom Controls -->
+              <div class="map-controls">
+                <button id="zoomInBtn" class="map-control-btn" title="Zoom In">
+                  <i class="ri-zoom-in-line"></i>
+                </button>
+                <button id="zoomOutBtn" class="map-control-btn" title="Zoom Out">
+                  <i class="ri-zoom-out-line"></i>
+                </button>
+                <button id="resetZoomBtn" class="map-control-btn" title="Reset View">
+                  <i class="ri-focus-3-line"></i>
+                </button>
+                <div class="zoom-slider-container">
+                  <label for="zoomSlider" style="font-size: 12px; margin-right: 8px;">Zoom:</label>
+                  <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="width: 120px;">
+                  <span id="zoomLevel" style="font-size: 12px; margin-left: 8px;">100%</span>
+                </div>
+              </div>
+
+              <svg id="mapSvg" width="100%" height="600" viewBox="0 0 800 600"
+                preserveAspectRatio="xMidYMid meet"></svg>
+
+              <!-- Map interaction hint -->
+              <div class="map-hint">
+                <i class="ri-information-line"></i> Drag to pan • Scroll to zoom
+              </div>
+            </div>
+
+            <div id="chartsWrapper">
+              <!-- LINE CHART -->
+              <div class="chart-container">
+                <h3 class="chart-title">Long-term Trends in London's Housing Market</h3>
+                <svg id="lineChart" width="100%" height="450" viewBox="0 0 800 450"
+                  preserveAspectRatio="xMidYMid meet"></svg>
+              </div>
+
+              <!-- RANK CHART -->
+              <div class="chart-container">
+                <h3 class="chart-title">Borough Ranking Over Time (1 = Highest Price / Volume)</h3>
+                <svg id="rankChart" width="100%" height="500" viewBox="0 0 800 500"
+                  preserveAspectRatio="xMidYMid meet"></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- INSIGHT SECTION -->
+          <div id="insightContainer" class="insight-box">
+            <h3 class="insight-title">What This Data Tells Us</h3>
+            <p id="insightText"></p>
+          </div>
+
+          <!-- Tooltip for hover interaction -->
+          <div class="tooltip"></div>
+
+          <p style="text-align:center;color:var(--text-light);font-style:italic;margin-top:20px;">Source: Office for
+            National Statistics</p>
+        </section>
+        <!-- 理想社区查找板块 -->
+        <section id="find"
+          style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;position:relative;">
+          <div class="section-text-header">
+            <h2>Find your ideal neighborhoods</h2>
+            <p>Adjust the sliders to match your priorities and find the perfect London neighborhood.</p>
+          </div>
+
+          <div class="suitability-container">
+            <!-- 左侧区域:地图 + 部分指标 -->
+            <div class="suitability-left">
+              <!-- 地图 -->
+              <div class="suitability-map">
+                <svg width="100%" height="500" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet"></svg>
+                <div class="suitability-tooltip"
+                  style="position:absolute; background:rgba(0,0,0,0.8); color:white; padding:10px; border-radius:4px; pointer-events:none; opacity:0; transition:opacity 0.3s;">
+                </div>
+              </div>
+
+              <!-- 地图下方的指标组 1 & 2 -->
+              <div class="suitability-metrics-bottom">
+                <!-- 可达性与连接性 -->
+                <div class="metric-group">
+                  <h4 style="margin-bottom:15px; font-size:16px;">Accessibility & Connectivity</h4>
+
+                  <!-- 通勤时间滑块 -->
+                  <div class="metric-item">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                      <label style="font-size:14px; color:var(--text-dark);">Average travel time to major employment centres (min)</label>
+                      <span id="commuteValue" style="font-size:14px; font-weight:600;">30 min</span>
+                    </div>
+                    <input type="range" id="commuteSlider" min="0" max="60" value="30" class="preference-slider"
+                      style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                      oninput="document.getElementById('commuteValue').textContent = this.value + ' min'">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                      <span>Long commute</span>
+                      <span>Quick commute</span>
+                    </div>
+                  </div>
+
+                  <!-- 交通可靠性滑块 -->
+                  <div class="metric-item" style="margin-top:20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                      <label style="font-size:14px; color:var(--text-dark);">Average Bus Waiting time (min)</label>
+                      <span id="transportValue" style="font-size:14px; font-weight:600;">70%</span>
+                    </div>
+                    <input type="range" id="transportSlider" min="0" max="100" value="70" class="preference-slider"
+                      style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                      oninput="document.getElementById('transportValue').textContent = this.value + '%'">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                      <span>Long Time</span>
+                      <span>Short Time</span>
+                    </div>
+                  </div>
+
+                  <!-- 宽带覆盖率滑块 -->
+                  <div class="metric-item" style="margin-top:20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                      <label style="font-size:14px; color:var(--text-dark);">High-speed broadband availability (%)</label>
+                      <span id="broadbandValue" style="font-size:14px; font-weight:600;">90%</span>
+                    </div>
+                    <input type="range" id="broadbandSlider" min="0" max="100" value="90" class="preference-slider"
+                      style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                      oninput="document.getElementById('broadbandValue').textContent = this.value + '%'">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                      <span>Low coverage</span>
+                      <span>High coverage</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 环境与宜居性 -->
+                <div class="metric-group" style="margin-top:30px;">
+                  <h4 style="margin-bottom:15px; font-size:16px;">Environment & Liveability</h4>
+
+                  <!-- 公园可达性滑块 -->
+                  <div class="metric-item">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                      <label style="font-size:14px; color:var(--text-dark);">Proportion of parks and open water (%)</label>
+                      <span id="parksValue" style="font-size:14px; font-weight:600;">80%</span>
+                    </div>
+                    <input type="range" id="parksSlider" min="0" max="100" value="80" class="preference-slider"
+                      style="width:100%; -webkit-appearance:none; appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                      oninput="document.getElementById('parksValue').textContent = this.value + '%'">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                      <span>Limited access</span>
+                      <span>Abundant green space</span>
+                    </div>
+                  </div>
+
+                  <!-- 空气质量滑块 -->
+                  <div class="metric-item" style="margin-top:20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                      <label style="font-size:14px; color:var(--text-dark);">Greenhouse gas emissions per capita (tCO₂e)</label>
+                      <span id="airValue" style="font-size:14px; font-weight:600;">60%</span>
+                    </div>
+                    <input type="range" id="airSlider" min="0" max="100" value="60" class="preference-slider"
+                      style="width:100%; -webkit-appearance:none; appearance:none;height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                      oninput="document.getElementById('airValue').textContent = this.value + '%'">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                      <span>Poor</span>
+                      <span>Excellent</span>
+                    </div>
+                  </div>
+
+                  <!-- 人口密度滑块 -->
+                  <div class="metric-item" style="margin-top:20px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                      <label style="font-size:14px; color:var(--text-dark);">Population density (people per km²)</label>
+                      <span id="densityValue" style="font-size:14px; font-weight:600;">50%</span>
+                    </div>
+                    <input type="range" id="densitySlider" min="0" max="100" value="50" class="preference-slider"
+                      style="width:100%; -webkit-appearance:none; appearance:none;height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                      oninput="document.getElementById('densityValue').textContent = this.value + '%'">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                      <span>Dense</span>
+                      <span>Sparse</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧指标面板 -->
+            <div class="suitability-metrics-right">
+              <h3 style="margin-bottom:20px; color:var(--primary);">Your Preferences</h3>
+
+              <!-- 社区与生活方式 -->
+              <div class="metric-group" style="margin-top:30px;">
+                <h4 style="margin-bottom:15px; font-size:16px;">Community & Lifestyle</h4>
+
+                <!-- 学校评分滑块 -->
+                <div class="metric-item">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Share of schools rated ‘Outstanding’ (%)</label>
+                    <span id="schoolValue" style="font-size:14px; font-weight:600;">4</span>
+                  </div>
+                  <input type="range" id="schoolSlider" min="1.00" max="5.00" value="4.00" step="0.1"
+                    class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('schoolValue').textContent = parseFloat(this.value).toFixed(1)">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Low Percentage</span>
+                    <span>High Percentage</span>
+                  </div>
+                </div>
+
+                <!-- 多样性滑块 -->
+                <div class="metric-item" style="margin-top:20px;">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Number of Restaurant, café, and pub</label>
+                    <span id="diversityValue" style="font-size:14px; font-weight:600;">90%</span>
+                  </div>
+                  <input type="range" id="diversitySlider" min="0" max="100" value="90" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('diversityValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Low</span>
+                    <span>High</span>
+                  </div>
+                </div>
+
+                <!-- 超市密度滑块 -->
+                <div class="metric-item" style="margin-top:20px;">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Supermarkets per 1,000 residents</label>
+                    <span id="supermarketValue" style="font-size:14px; font-weight:600;">50%</span>
+                  </div>
+                  <input type="range" id="supermarketSlider" min="0" max="100" value="50" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('supermarketValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Fewer options</span>
+                    <span>Many options</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 经济与幸福 -->
+              <div class="metric-group" style="margin-top:30px;">
+                <h4 style="margin-bottom:15px; font-size:16px;">Economic & Wellbeing</h4>
+
+                <!-- 可支配收入滑块 -->
+                <div class="metric-item">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Gross disposable household income (£ per year)</label>
+                    <span id="incomeValue" style="font-size:14px; font-weight:600;">60%</span>
+                  </div>
+                  <input type="range" id="incomeSlider" min="0" max="100" value="60" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('incomeValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Lower income</span>
+                    <span>Higher income</span>
+                  </div>
+                </div>
+
+                <!-- 周薪水平滑块 -->
+                <div class="metric-item" style="margin-top:20px;">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Median weekly pay (£)</label>
+                    <span id="payValue" style="font-size:14px; font-weight:600;">60%</span>
+                  </div>
+                  <input type="range" id="paySlider" min="0" max="100" value="60" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('payValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Lower pay</span>
+                    <span>Higher pay</span>
+                  </div>
+                </div>
+
+                <!-- 幸福指数滑块 -->
+                <div class="metric-item" style="margin-top:20px;">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Average happiness index (1–10)</label>
+                    <span id="happinessValue" style="font-size:14px; font-weight:600;">75%</span>
+                  </div>
+                  <input type="range" id="happinessSlider" min="0" max="100" value="75" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('happinessValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Less happy</span>
+                    <span>Very happy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 表现最佳区域 -->
+        <section id="top">
+          <div class="section-title">
+            <h2>Top Performing boroughs</h2>
+            <p>Discover London's top-performing boroughs and the areas leading the way in various key metrics.</p>
+          </div>
+
+ <div class="data-grid">
+
+  <!-- 1 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-route-line"></i></div>
+    <h3>Average travel time to major employment centres (min)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Kensington and Chelsea</li>
+      <li><span class="rank">2nd</span> Tower Hamlets</li>
+      <li><span class="rank">3rd</span> Hackney</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Note: Average travel time in minutes to nearest employment centre with 500+ jobs available, 2019
+    </p>
+  </div>
+
+  <!-- 2 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-bus-2-line"></i></div>
+    <h3>Average Bus Waiting time (min)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Camden</li>
+      <li><span class="rank">2nd</span> City of London</li>
+      <li><span class="rank">3rd</span> Barking and Dagenham</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Transport for London<br>
+      Note: Average Waiting Time (AWT) of Public Bus - QSI Performance Route Performance Results for London Borough, Q1 2025.
+    </p>
+  </div>
+
+  <!-- 3 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-wifi-line"></i></div>
+    <h3>High-speed broadband availability (%)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Camden</li>
+      <li><span class="rank">2nd</span> Barking and Dagenham</li>
+      <li><span class="rank">3rd</span> Islington</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Note: Percentage of premises that have gigabit-capable service coverage, May 2025.
+    </p>
+  </div>
+
+  <!-- 4 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-landscape-line"></i></div>
+    <h3>Proportion of parks and open water (%)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Havering</li>
+      <li><span class="rank">2nd</span> Bromley</li>
+      <li><span class="rank">3rd</span> Richmond upon Thames</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: London Greater Authority<br>
+      Note: London Green and Blue Cover, 2018.
+    </p>
+  </div>
+
+  <!-- 5 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-leaf-line"></i></div>
+    <h3>Greenhouse gas emissions per capita (tCO₂e)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Harrow</li>
+      <li><span class="rank">2nd</span> Hackney</li>
+      <li><span class="rank">3rd</span> Lewisham</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Note: Greenhouse gas emissions per capita, 2023.
+    </p>
+  </div>
+
+  <!-- 6 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-group-2-line"></i></div>
+    <h3>Population density (people per km²)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Bromley</li>
+      <li><span class="rank">2nd</span> Havering</li>
+      <li><span class="rank">3rd</span> Hillingdon</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Number of people resident per square kilometre, June 2024.
+    </p>
+  </div>
+
+  <!-- 7 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-graduation-cap-line"></i></div>
+    <h3>Share of schools rated ‘Outstanding’ (%)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> City of London</li>
+      <li><span class="rank">2nd</span> Kensington and Chelsea</li>
+      <li><span class="rank">3rd</span> Richmond upon Thames</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Ofsted<br>
+      Note: Overall Effectiveness Rating – State-funded schools, April 2025.
+    </p>
+  </div>
+
+  <!-- 8 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-restaurant-2-line"></i></div>
+    <h3>Number of Restaurants, Cafés, and Pubs</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Westminster</li>
+      <li><span class="rank">2nd</span> Camden</li>
+      <li><span class="rank">3rd</span> Islington</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Number of licensed and unlicensed food businesses, May 2018.
+    </p>
+  </div>
+
+  <!-- 9 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-shopping-basket-2-line"></i></div>
+    <h3>Supermarkets per 1,000 residents</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> City of London</li>
+      <li><span class="rank">2nd</span> Westminster</li>
+      <li><span class="rank">3rd</span> Camden</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Note: Supermarkets per 10,000 people, 2023.
+    </p>
+  </div>
+
+  <!-- 10 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-money-pound-box-line"></i></div>
+    <h3>Gross disposable household income (£ per year)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> City of London</li>
+      <li><span class="rank">2nd</span> Kensington and Chelsea</li>
+      <li><span class="rank">3rd</span> Westminster</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Note: Average income per person (£) after taxes and benefits, 2023.
+    </p>
+  </div>
+
+  <!-- 11 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-hand-coin-line"></i></div>
+    <h3>Median weekly pay (£)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Wandsworth</li>
+      <li><span class="rank">2nd</span> Westminster</li>
+      <li><span class="rank">3rd</span> Richmond upon Thames</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Note: Average weekly pay based on where people live, April 2024.
+    </p>
+  </div>
+
+  <!-- 12 -->
+  <div class="data-card">
+    <div class="data-icon"><i class="ri-emotion-happy-line"></i></div>
+    <h3>Average happiness index (1–10)</h3>
+    <ul class="data-list">
+      <li><span class="rank">1st</span> Newham</li>
+      <li><span class="rank">2nd</span> Hillingdon</li>
+      <li><span class="rank">3rd</span> Hammersmith and Fulham</li>
+    </ul>
+    <p style="margin-top:15px;font-size:14px;color:var(--text-light);">
+      Source: Office for National Statistics<br>
+      Note: Average happiness rating (0–10) for people aged 16 and over, November 2023.
+    </p>
+  </div>
+</div>
+
+        </section>
+
+        <!-- 区域指南卡片 -->
+        <section id="guides" style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;">
+          <div class="section-title">
+            <h2>Explore Area Guides by borough</h2>
+            <p>Get detailed insights into each London borough with our comprehensive area guides.</p>
+          </div>
+
+          <!-- Borough cards will be dynamically generated by boroughs.js -->
+          <div id="boroughCardsContainer" class="borough-grid">
+            <!-- Loading placeholder -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-light);">
+              <i class="ri-loader-4-line" style="font-size: 32px; animation: spin 1s linear infinite;"></i>
+              <p style="margin-top: 10px;">Loading boroughs...</p>
+            </div>
+          </div>
+        </section> <!-- 关闭 guides 部分 -->
+
+        <!-- 联系部分（补充完整） -->
+        <section id="about">
+          <div class="section-title">
+            <h2>About</h2>
+            <p>Have questions about London's housing market or need personalized advice? Get in touch with our experts.
+            </p>
+          </div>
+          <div style="max-width: 600px; margin: 0 auto;">
+            <form>
+              <div style="margin-bottom: 15px;">
+                <label for="name" style="display: block; margin-bottom: 5px; font-weight: 600;">Your Name</label>
+                <input type="text" id="name"
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+              </div>
+              <div style="margin-bottom: 15px;">
+                <label for="email" style="display: block; margin-bottom: 5px; font-weight: 600;">Email Address</label>
+                <input type="email" id="email"
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+              </div>
+              <div style="margin-bottom: 15px;">
+                <label for="message" style="display: block; margin-bottom: 5px; font-weight: 600;">Your Message</label>
+                <textarea id="message" rows="4"
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="footer-logo">Four Sights</div>
+          <p style="color: #adb5bd;">Comprehensive analysis of London's housing market across all 32 boroughs.</p>
+        </div>
+        <div>
+          <h4 style="color: white; margin-bottom: 15px;">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#compare">Compare Boroughs</a></li>
+            <li><a href="#find">Find your ideal neighborhoods</a></li>
+            <li><a href="#top">Top Performers</a></li>
+            <li><a href="#guides">Area Guides</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 引入本地脚本 -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/map.js"></script>
+  <script src="assets/js/suitability.js"></script>
+  <script src="assets/js/boroughs.js"></script>
+  <script src="assets/js/scroll-transitions.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,868 @@
+{
+  "data": [
+    {
+      "Area code": "E09000001",
+      "Area name": "City of London",
+      "average_time_to_employment_centre_in_minutes": 7.85183101725118,
+      "average_waiting_time_in_minutes": 6.3,
+      "percent_coverage_broadband": 80.8,
+      "percent_green_plus_blue_area": 13.311089059337997,
+      "Greenhouse_gas_emissions_per_capita": 52.16,
+      "density_per_kilometer": 5229,
+      "gross_disposable_household_income": 129429,
+      "gross_median_weekly_pay": 762.4,
+      "happiness_index": 7.324062499999998,
+      "supermarket_per_1000": 37.28,
+      "percent_school_outstanding": 100.0,
+      "number_of_restaurant_cafe,pub": 800
+    },
+    {
+      "Area code": "E09000002",
+      "Area name": "Barking and Dagenham",
+      "average_time_to_employment_centre_in_minutes": 8.38106029663824,
+      "average_waiting_time_in_minutes": 6.4,
+      "percent_coverage_broadband": 95.4,
+      "percent_green_plus_blue_area": 45.29927062818809,
+      "Greenhouse_gas_emissions_per_capita": 2.98,
+      "density_per_kilometer": 6447,
+      "gross_disposable_household_income": 21179,
+      "gross_median_weekly_pay": 612.9,
+      "happiness_index": 7.48,
+      "supermarket_per_1000": 1.6,
+      "percent_school_outstanding": 12.921348314606742,
+      "number_of_restaurant_cafe,pub": 255
+    },
+    {
+      "Area code": "E09000003",
+      "Area name": "Barnet",
+      "average_time_to_employment_centre_in_minutes": 7.52157496649399,
+      "average_waiting_time_in_minutes": 6.6,
+      "percent_coverage_broadband": 71.8,
+      "percent_green_plus_blue_area": 58.686071418455136,
+      "Greenhouse_gas_emissions_per_capita": 2.85,
+      "density_per_kilometer": 4668,
+      "gross_disposable_household_income": 36880,
+      "gross_median_weekly_pay": 714.6,
+      "happiness_index": 6.95,
+      "supermarket_per_1000": 1.9,
+      "percent_school_outstanding": 29.43495400788436,
+      "number_of_restaurant_cafe,pub": 745
+    },
+    {
+      "Area code": "E09000004",
+      "Area name": "Bexley",
+      "average_time_to_employment_centre_in_minutes": 10.3135612483122,
+      "average_waiting_time_in_minutes": 6.9,
+      "percent_coverage_broadband": 92.7,
+      "percent_green_plus_blue_area": 49.724120250548374,
+      "Greenhouse_gas_emissions_per_capita": 2.87,
+      "density_per_kilometer": 4234,
+      "gross_disposable_household_income": 25722,
+      "gross_median_weekly_pay": 694.4,
+      "happiness_index": 7.39,
+      "supermarket_per_1000": 1.95,
+      "percent_school_outstanding": 14.730290456431536,
+      "number_of_restaurant_cafe,pub": 415
+    },
+    {
+      "Area code": "E09000005",
+      "Area name": "Brent",
+      "average_time_to_employment_centre_in_minutes": 7.52448785634642,
+      "average_waiting_time_in_minutes": 6.6,
+      "percent_coverage_broadband": 85.0,
+      "percent_green_plus_blue_area": 40.96772036567503,
+      "Greenhouse_gas_emissions_per_capita": 2.78,
+      "density_per_kilometer": 8164,
+      "gross_disposable_household_income": 29569,
+      "gross_median_weekly_pay": 646.2,
+      "happiness_index": 7.27,
+      "supermarket_per_1000": 1.65,
+      "percent_school_outstanding": 24.031007751937985,
+      "number_of_restaurant_cafe,pub": 585
+    },
+    {
+      "Area code": "E09000006",
+      "Area name": "Bromley",
+      "average_time_to_employment_centre_in_minutes": 9.78143807484479,
+      "average_waiting_time_in_minutes": 7.3,
+      "percent_coverage_broadband": 91.7,
+      "percent_green_plus_blue_area": 68.73553716484385,
+      "Greenhouse_gas_emissions_per_capita": 2.72,
+      "density_per_kilometer": 2234,
+      "gross_disposable_household_income": 34399,
+      "gross_median_weekly_pay": 818.9,
+      "happiness_index": 7.35,
+      "supermarket_per_1000": 2.45,
+      "percent_school_outstanding": 29.313232830820766,
+      "number_of_restaurant_cafe,pub": 620
+    },
+    {
+      "Area code": "E09000007",
+      "Area name": "Camden",
+      "average_time_to_employment_centre_in_minutes": 5.73005338596238,
+      "average_waiting_time_in_minutes": 6.0,
+      "percent_coverage_broadband": 95.9,
+      "percent_green_plus_blue_area": 44.18826200917205,
+      "Greenhouse_gas_emissions_per_capita": 4.38,
+      "density_per_kilometer": 9961,
+      "gross_disposable_household_income": 61657,
+      "gross_median_weekly_pay": 766.6,
+      "happiness_index": 7.28,
+      "supermarket_per_1000": 3.81,
+      "percent_school_outstanding": 32.86118980169972,
+      "number_of_restaurant_cafe,pub": 1430
+    },
+    {
+      "Area code": "E09000008",
+      "Area name": "Croydon",
+      "average_time_to_employment_centre_in_minutes": 9.92424065940626,
+      "average_waiting_time_in_minutes": 7.0,
+      "percent_coverage_broadband": 87.5,
+      "percent_green_plus_blue_area": 55.661463358010735,
+      "Greenhouse_gas_emissions_per_capita": 2.54,
+      "density_per_kilometer": 4734,
+      "gross_disposable_household_income": 27096,
+      "gross_median_weekly_pay": 721.3,
+      "happiness_index": 7.11,
+      "supermarket_per_1000": 2.18,
+      "percent_school_outstanding": 22.146739130434785,
+      "number_of_restaurant_cafe,pub": 715
+    },
+    {
+      "Area code": "E09000009",
+      "Area name": "Ealing",
+      "average_time_to_employment_centre_in_minutes": 8.30744560501529,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 90.0,
+      "percent_green_plus_blue_area": 44.898701894383755,
+      "Greenhouse_gas_emissions_per_capita": 3.0,
+      "density_per_kilometer": 6949,
+      "gross_disposable_household_income": 30437,
+      "gross_median_weekly_pay": 684.8,
+      "happiness_index": 7.25,
+      "supermarket_per_1000": 1.77,
+      "percent_school_outstanding": 28.621908127208478,
+      "number_of_restaurant_cafe,pub": 640
+    },
+    {
+      "Area code": "E09000010",
+      "Area name": "Enfield",
+      "average_time_to_employment_centre_in_minutes": 8.28715760223075,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 89.9,
+      "percent_green_plus_blue_area": 58.11105394249396,
+      "Greenhouse_gas_emissions_per_capita": 3.54,
+      "density_per_kilometer": 4052,
+      "gross_disposable_household_income": 27981,
+      "gross_median_weekly_pay": 646.2,
+      "happiness_index": 7.41,
+      "supermarket_per_1000": 1.52,
+      "percent_school_outstanding": 15.909090909090908,
+      "number_of_restaurant_cafe,pub": 530
+    },
+    {
+      "Area code": "E09000011",
+      "Area name": "Greenwich",
+      "average_time_to_employment_centre_in_minutes": 8.35239178200466,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 88.8,
+      "percent_green_plus_blue_area": 49.998691991206655,
+      "Greenhouse_gas_emissions_per_capita": 2.85,
+      "density_per_kilometer": 6331,
+      "gross_disposable_household_income": 28453,
+      "gross_median_weekly_pay": 749.6,
+      "happiness_index": 7.42,
+      "supermarket_per_1000": 2.28,
+      "percent_school_outstanding": 23.32695984703633,
+      "number_of_restaurant_cafe,pub": 475
+    },
+    {
+      "Area code": "E09000012",
+      "Area name": "Hackney",
+      "average_time_to_employment_centre_in_minutes": 4.80184615296035,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 91.3,
+      "percent_green_plus_blue_area": 41.0273031835891,
+      "Greenhouse_gas_emissions_per_capita": 2.12,
+      "density_per_kilometer": 14007,
+      "gross_disposable_household_income": 34013,
+      "gross_median_weekly_pay": 762.5,
+      "happiness_index": 7.05,
+      "supermarket_per_1000": 1.81,
+      "percent_school_outstanding": 36.25,
+      "number_of_restaurant_cafe,pub": 850
+    },
+    {
+      "Area code": "E09000013",
+      "Area name": "Hammersmith and Fulham",
+      "average_time_to_employment_centre_in_minutes": 5.11027337329839,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 88.2,
+      "percent_green_plus_blue_area": 32.22362342774619,
+      "Greenhouse_gas_emissions_per_capita": 3.17,
+      "density_per_kilometer": 11504,
+      "gross_disposable_household_income": 51554,
+      "gross_median_weekly_pay": 798.5,
+      "happiness_index": 7.66,
+      "supermarket_per_1000": 3.39,
+      "percent_school_outstanding": 41.340782122905026,
+      "number_of_restaurant_cafe,pub": 655
+    },
+    {
+      "Area code": "E09000014",
+      "Area name": "Haringey",
+      "average_time_to_employment_centre_in_minutes": 7.46109658463334,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 89.2,
+      "percent_green_plus_blue_area": 44.33667894689024,
+      "Greenhouse_gas_emissions_per_capita": 2.3,
+      "density_per_kilometer": 8912,
+      "gross_disposable_household_income": 37746,
+      "gross_median_weekly_pay": 727.8,
+      "happiness_index": 7.17,
+      "supermarket_per_1000": 1.85,
+      "percent_school_outstanding": 29.273084479371313,
+      "number_of_restaurant_cafe,pub": 565
+    },
+    {
+      "Area code": "E09000015",
+      "Area name": "Harrow",
+      "average_time_to_employment_centre_in_minutes": 8.6682004567687,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 89.3,
+      "percent_green_plus_blue_area": 55.89199870475865,
+      "Greenhouse_gas_emissions_per_capita": 2.07,
+      "density_per_kilometer": 5365,
+      "gross_disposable_household_income": 31249,
+      "gross_median_weekly_pay": 669.2,
+      "happiness_index": 7.6,
+      "supermarket_per_1000": 1.57,
+      "percent_school_outstanding": 37.22222222222222,
+      "number_of_restaurant_cafe,pub": 430
+    },
+    {
+      "Area code": "E09000016",
+      "Area name": "Havering",
+      "average_time_to_employment_centre_in_minutes": 9.98875487628642,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 90.9,
+      "percent_green_plus_blue_area": 69.49121824654752,
+      "Greenhouse_gas_emissions_per_capita": 3.39,
+      "density_per_kilometer": 2459,
+      "gross_disposable_household_income": 27088,
+      "gross_median_weekly_pay": 710.8,
+      "happiness_index": 7.54,
+      "supermarket_per_1000": 2.1,
+      "percent_school_outstanding": 15.132924335378323,
+      "number_of_restaurant_cafe,pub": 465
+    },
+    {
+      "Area code": "E09000017",
+      "Area name": "Hillingdon",
+      "average_time_to_employment_centre_in_minutes": 9.22257398462836,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 92.2,
+      "percent_green_plus_blue_area": 57.85599194116029,
+      "Greenhouse_gas_emissions_per_capita": 4.42,
+      "density_per_kilometer": 2845,
+      "gross_disposable_household_income": 25649,
+      "gross_median_weekly_pay": 689.9,
+      "happiness_index": 7.69,
+      "supermarket_per_1000": 1.99,
+      "percent_school_outstanding": 15.859766277128548,
+      "number_of_restaurant_cafe,pub": 575
+    },
+    {
+      "Area code": "E09000018",
+      "Area name": "Hounslow",
+      "average_time_to_employment_centre_in_minutes": 7.40900914938377,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 90.2,
+      "percent_green_plus_blue_area": 50.46249136814339,
+      "Greenhouse_gas_emissions_per_capita": 3.25,
+      "density_per_kilometer": 5350,
+      "gross_disposable_household_income": 28652,
+      "gross_median_weekly_pay": 659.3,
+      "happiness_index": 7.49,
+      "supermarket_per_1000": 1.98,
+      "percent_school_outstanding": 25.56053811659193,
+      "number_of_restaurant_cafe,pub": 500
+    },
+    {
+      "Area code": "E09000019",
+      "Area name": "Islington",
+      "average_time_to_employment_centre_in_minutes": 4.80426915924211,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 95.1,
+      "percent_green_plus_blue_area": 35.141760208378464,
+      "Greenhouse_gas_emissions_per_capita": 2.71,
+      "density_per_kilometer": 15010,
+      "gross_disposable_household_income": 41955,
+      "gross_median_weekly_pay": 811.2,
+      "happiness_index": 7.2,
+      "supermarket_per_1000": 3.32,
+      "percent_school_outstanding": 30.09950248756219,
+      "number_of_restaurant_cafe,pub": 965
+    },
+    {
+      "Area code": "E09000020",
+      "Area name": "Kensington and Chelsea",
+      "average_time_to_employment_centre_in_minutes": 3.22467965616833,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 93.4,
+      "percent_green_plus_blue_area": 32.67477868733602,
+      "Greenhouse_gas_emissions_per_capita": 4.73,
+      "density_per_kilometer": 11918,
+      "gross_disposable_household_income": 110651,
+      "gross_median_weekly_pay": 810.1,
+      "happiness_index": 7.23,
+      "supermarket_per_1000": 2.65,
+      "percent_school_outstanding": 53.333333333333336,
+      "number_of_restaurant_cafe,pub": 745
+    },
+    {
+      "Area code": "E09000021",
+      "Area name": "Kingston upon Thames",
+      "average_time_to_employment_centre_in_minutes": 8.50910170936246,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 91.0,
+      "percent_green_plus_blue_area": 53.47912192823669,
+      "Greenhouse_gas_emissions_per_capita": 3.07,
+      "density_per_kilometer": 4635,
+      "gross_disposable_household_income": 34234,
+      "gross_median_weekly_pay": 727.4,
+      "happiness_index": 7.25,
+      "supermarket_per_1000": 2.44,
+      "percent_school_outstanding": 28.013029315960914,
+      "number_of_restaurant_cafe,pub": 390
+    },
+    {
+      "Area code": "E09000022",
+      "Area name": "Lambeth",
+      "average_time_to_employment_centre_in_minutes": 6.11983558345968,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 91.3,
+      "percent_green_plus_blue_area": 34.53608596443543,
+      "Greenhouse_gas_emissions_per_capita": 2.57,
+      "density_per_kilometer": 11822,
+      "gross_disposable_household_income": 35607,
+      "gross_median_weekly_pay": 797.4,
+      "happiness_index": 7.5,
+      "supermarket_per_1000": 2.8,
+      "percent_school_outstanding": 35.700934579439256,
+      "number_of_restaurant_cafe,pub": 830
+    },
+    {
+      "Area code": "E09000023",
+      "Area name": "Lewisham",
+      "average_time_to_employment_centre_in_minutes": 8.76061272437319,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 88.9,
+      "percent_green_plus_blue_area": 41.05373746184992,
+      "Greenhouse_gas_emissions_per_capita": 2.15,
+      "density_per_kilometer": 8572,
+      "gross_disposable_household_income": 29500,
+      "gross_median_weekly_pay": 706.4,
+      "happiness_index": 7.27,
+      "supermarket_per_1000": 1.93,
+      "percent_school_outstanding": 21.764705882352942,
+      "number_of_restaurant_cafe,pub": 525
+    },
+    {
+      "Area code": "E09000024",
+      "Area name": "Merton",
+      "average_time_to_employment_centre_in_minutes": 8.04140775737272,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 94.7,
+      "percent_green_plus_blue_area": 49.62937649576842,
+      "Greenhouse_gas_emissions_per_capita": 2.93,
+      "density_per_kilometer": 5808,
+      "gross_disposable_household_income": 37416,
+      "gross_median_weekly_pay": 721.6,
+      "happiness_index": 7.39,
+      "supermarket_per_1000": 2.32,
+      "percent_school_outstanding": 26.331360946745562,
+      "number_of_restaurant_cafe,pub": 395
+    },
+    {
+      "Area code": "E09000025",
+      "Area name": "Newham",
+      "average_time_to_employment_centre_in_minutes": 7.02636978524889,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 90.6,
+      "percent_green_plus_blue_area": 40.10389797279082,
+      "Greenhouse_gas_emissions_per_capita": 2.64,
+      "density_per_kilometer": 10347,
+      "gross_disposable_household_income": 24233,
+      "gross_median_weekly_pay": 635.9,
+      "happiness_index": 8.0,
+      "supermarket_per_1000": 1.31,
+      "percent_school_outstanding": 35.738255033557046,
+      "number_of_restaurant_cafe,pub": 515
+    },
+    {
+      "Area code": "E09000026",
+      "Area name": "Redbridge",
+      "average_time_to_employment_centre_in_minutes": 7.70084365751109,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 93.0,
+      "percent_green_plus_blue_area": 54.976660054599535,
+      "Greenhouse_gas_emissions_per_capita": 2.24,
+      "density_per_kilometer": 5696,
+      "gross_disposable_household_income": 27443,
+      "gross_median_weekly_pay": 669.0,
+      "happiness_index": 7.63,
+      "supermarket_per_1000": 1.39,
+      "percent_school_outstanding": 30.83511777301927,
+      "number_of_restaurant_cafe,pub": 485
+    },
+    {
+      "Area code": "E09000027",
+      "Area name": "Richmond upon Thames",
+      "average_time_to_employment_centre_in_minutes": 6.83889040708237,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 89.9,
+      "percent_green_plus_blue_area": 67.23181879647161,
+      "Greenhouse_gas_emissions_per_capita": 2.84,
+      "density_per_kilometer": 3427,
+      "gross_disposable_household_income": 49666,
+      "gross_median_weekly_pay": 824.0,
+      "happiness_index": 7.21,
+      "supermarket_per_1000": 2.51,
+      "percent_school_outstanding": 44.662921348314605,
+      "number_of_restaurant_cafe,pub": 530
+    },
+    {
+      "Area code": "E09000028",
+      "Area name": "Southwark",
+      "average_time_to_employment_centre_in_minutes": 6.12206345336499,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 90.0,
+      "percent_green_plus_blue_area": 41.89396120030326,
+      "Greenhouse_gas_emissions_per_capita": 2.71,
+      "density_per_kilometer": 10901,
+      "gross_disposable_household_income": 34635,
+      "gross_median_weekly_pay": 788.6,
+      "happiness_index": 7.12,
+      "supermarket_per_1000": 2.5,
+      "percent_school_outstanding": 30.660377358490564,
+      "number_of_restaurant_cafe,pub": 875
+    },
+    {
+      "Area code": "E09000029",
+      "Area name": "Sutton",
+      "average_time_to_employment_centre_in_minutes": 8.98359711524699,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 92.2,
+      "percent_green_plus_blue_area": 50.94107075434165,
+      "Greenhouse_gas_emissions_per_capita": 2.72,
+      "density_per_kilometer": 4893,
+      "gross_disposable_household_income": 27343,
+      "gross_median_weekly_pay": 728.7,
+      "happiness_index": 7.41,
+      "supermarket_per_1000": 2.15,
+      "percent_school_outstanding": 29.100529100529098,
+      "number_of_restaurant_cafe,pub": 375
+    },
+    {
+      "Area code": "E09000030",
+      "Area name": "Tower Hamlets",
+      "average_time_to_employment_centre_in_minutes": 4.35089142886322,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 85.8,
+      "percent_green_plus_blue_area": 37.13381644112672,
+      "Greenhouse_gas_emissions_per_capita": 3.09,
+      "density_per_kilometer": 16787,
+      "gross_disposable_household_income": 31111,
+      "gross_median_weekly_pay": 766.5,
+      "happiness_index": 6.87,
+      "supermarket_per_1000": 2.22,
+      "percent_school_outstanding": 35.48951048951049,
+      "number_of_restaurant_cafe,pub": 905
+    },
+    {
+      "Area code": "E09000031",
+      "Area name": "Waltham Forest",
+      "average_time_to_employment_centre_in_minutes": 7.24801941780039,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 93.9,
+      "percent_green_plus_blue_area": 50.59386321103144,
+      "Greenhouse_gas_emissions_per_capita": 2.15,
+      "density_per_kilometer": 7208,
+      "gross_disposable_household_income": 28104,
+      "gross_median_weekly_pay": 717.7,
+      "happiness_index": 6.82,
+      "supermarket_per_1000": 1.69,
+      "percent_school_outstanding": 23.29059829059829,
+      "number_of_restaurant_cafe,pub": 495
+    },
+    {
+      "Area code": "E09000032",
+      "Area name": "Wandsworth",
+      "average_time_to_employment_centre_in_minutes": 6.24784594785723,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 87.6,
+      "percent_green_plus_blue_area": 42.20553297632,
+      "Greenhouse_gas_emissions_per_capita": 2.33,
+      "density_per_kilometer": 9855,
+      "gross_disposable_household_income": 47804,
+      "gross_median_weekly_pay": 843.3,
+      "happiness_index": 7.35,
+      "supermarket_per_1000": 2.53,
+      "percent_school_outstanding": 30.784313725490197,
+      "number_of_restaurant_cafe,pub": 760
+    },
+    {
+      "Area code": "E09000033",
+      "Area name": "Westminster",
+      "average_time_to_employment_centre_in_minutes": 5.08266707038003,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 86.5,
+      "percent_green_plus_blue_area": 35.60871186257935,
+      "Greenhouse_gas_emissions_per_capita": 7.46,
+      "density_per_kilometer": 9775,
+      "gross_disposable_household_income": 76381,
+      "gross_median_weekly_pay": 843.3,
+      "happiness_index": 7.01,
+      "supermarket_per_1000": 4.01,
+      "percent_school_outstanding": 31.085043988269796,
+      "number_of_restaurant_cafe,pub": 2545
+    }
+  ],
+  "scale slider": [
+    {
+      "Unnamed: 0": null,
+      "Unnamed: 1": "1st Quartile",
+      "average_time_to_employment_centre_in_minutes": 6.12206345336499,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 88.8,
+      "percent_green_plus_blue_area": 40.96772036567503,
+      "Greenhouse_gas_emissions_per_capita": 2.57,
+      "density_per_kilometer": 4734,
+      "gross_disposable_household_income": 27981,
+      "gross_median_weekly_pay": 689.9,
+      "happiness_index": 7.2,
+      "supermarket_per_1000": 1.81,
+      "percent_school_outstanding": 23.32695984703633,
+      "number_of_restaurant_cafe,pub": 485
+    },
+    {
+      "Unnamed: 0": null,
+      "Unnamed: 1": "2nd Quartile",
+      "average_time_to_employment_centre_in_minutes": 7.52448785634642,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 90.2,
+      "percent_green_plus_blue_area": 45.29927062818809,
+      "Greenhouse_gas_emissions_per_capita": 2.85,
+      "density_per_kilometer": 6447,
+      "gross_disposable_household_income": 31249,
+      "gross_median_weekly_pay": 727.4,
+      "happiness_index": 7.324062499999998,
+      "supermarket_per_1000": 2.15,
+      "percent_school_outstanding": 29.313232830820766,
+      "number_of_restaurant_cafe,pub": 575
+    },
+    {
+      "Unnamed: 0": null,
+      "Unnamed: 1": "3rd Quartile",
+      "average_time_to_employment_centre_in_minutes": 8.50910170936246,
+      "average_waiting_time_in_minutes": 6.8,
+      "percent_coverage_broadband": 92.2,
+      "percent_green_plus_blue_area": 54.976660054599535,
+      "Greenhouse_gas_emissions_per_capita": 3.17,
+      "density_per_kilometer": 9961,
+      "gross_disposable_household_income": 37746,
+      "gross_median_weekly_pay": 788.6,
+      "happiness_index": 7.48,
+      "supermarket_per_1000": 2.51,
+      "percent_school_outstanding": 35.48951048951049,
+      "number_of_restaurant_cafe,pub": 760
+    }
+  ],
+  "notes": [
+    {
+      "Travel time to employment centre by public transport and walking": "Average travel time in minutes to nearest employment centre with 500+ jobs available",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Source: Department for Transport",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Data download generated by ONS Explore Local Statistics on 30 Oct 2025",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "https://ons.gov.uk/explore-local-statistics/indicators/average-travel-time-public-transport-or-walking",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "QSI Performance Route Performance Results for London Borough Q1 2025 - tfl",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "2018 london borough green and blue cover summary data - GLA",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Greenhouse gas emissions",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Greenhouse gas emissions (tCO2e) per capita",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Source: Department for Energy Security and Net Zero",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Data download generated by ONS Explore Local Statistics on 6 Nov 2025",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "https://ons.gov.uk/explore-local-statistics/indicators/gross-disposable-household-income-per-head",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Gross median weekly pay",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Average weekly pay based on where people live",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Source: Office for National Statistics and Northern Ireland Statistics and Research Agency",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Data download generated by ONS Explore Local Statistics on 6 Nov 2025",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "https://ons.gov.uk/explore-local-statistics/indicators/gross-median-weekly-pay",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Gigabit capable broadband",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Percentage of premises that have coverage from a gigabit-capable service (download speeds of 1,000 Mbps or more)",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Source: Ofcom",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Data download generated by ONS Explore Local Statistics on 6 Nov 2025",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "https://ons.gov.uk/explore-local-statistics/indicators/gigabit-capable-broadband",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Happiness",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Average rating of happiness (0 = 'not at all happy', 10 = 'completely happy') for people aged 16 and over",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Source: Office for National Statistics",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Data download generated by ONS Explore Local Statistics on 6 Nov 2025",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "https://ons.gov.uk/explore-local-statistics/indicators/wellbeing-happiness",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Supermarkets",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Supermarkets per 10,000 people",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Source: Office for National Statistics",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Data download generated by ONS Explore Local Statistics on 6 Nov 2025",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "https://ons.gov.uk/explore-local-statistics/indicators/supermarkets",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Five-Year Ofsted Inspection Data (State-funded schools)",
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": null,
+      "Unnamed: 1": null
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Category",
+      "Unnamed: 1": "Attributes"
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Accessibility & Services",
+      "Unnamed: 1": "avg_time_to_employment_centre, avg_waiting_time, broadband coverage"
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Environment & Sustainability",
+      "Unnamed: 1": "green+blue area %, GHG emissions per capita, density per km²"
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Economic & Wellbeing",
+      "Unnamed: 1": "disposable household income, median weekly pay, happiness index"
+    },
+    {
+      "Travel time to employment centre by public transport and walking": "Lifestyle & Amenities",
+      "Unnamed: 1": "supermarket per 1000, % schools outstanding, number of restaurants/cafes/pubs"
+    }
+  ]
+}
