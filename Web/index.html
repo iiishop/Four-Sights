@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  
   <!-- D3 and TopoJSON for map -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/topojson@3"></script>
@@ -180,123 +180,87 @@
           </div>
 
           <div class="suitability-container">
-            <!-- 左侧区域:地图 + 部分指标 -->
-            <div class="suitability-left">
-              <!-- 地图 -->
-              <div class="suitability-map">
-                <svg width="100%" height="500" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet"></svg>
-                <div class="suitability-tooltip"
-                  style="position:absolute; background:rgba(0,0,0,0.8); color:white; padding:10px; border-radius:4px; pointer-events:none; opacity:0; transition:opacity 0.3s;">
-                </div>
-              </div>
-
-              <!-- 地图下方的指标组 1 & 2 -->
-              <div class="suitability-metrics-bottom">
-                <!-- 可达性与连接性 -->
-                <div class="metric-group">
-                  <h4 style="margin-bottom:15px; font-size:16px;">Accessibility & Connectivity</h4>
-
-                  <!-- 通勤时间滑块 -->
-                  <div class="metric-item">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                      <label style="font-size:14px; color:var(--text-dark);">Average travel time to major employment centres (min)</label>
-                      <span id="commuteValue" style="font-size:14px; font-weight:600;">30 min</span>
-                    </div>
-                    <input type="range" id="commuteSlider" min="0" max="60" value="30" class="preference-slider"
-                      style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                      oninput="document.getElementById('commuteValue').textContent = this.value + ' min'">
-                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                      <span>Long commute</span>
-                      <span>Quick commute</span>
-                    </div>
-                  </div>
-
-                  <!-- 交通可靠性滑块 -->
-                  <div class="metric-item" style="margin-top:20px;">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                      <label style="font-size:14px; color:var(--text-dark);">Average Bus Waiting time (min)</label>
-                      <span id="transportValue" style="font-size:14px; font-weight:600;">70%</span>
-                    </div>
-                    <input type="range" id="transportSlider" min="0" max="100" value="70" class="preference-slider"
-                      style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                      oninput="document.getElementById('transportValue').textContent = this.value + '%'">
-                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                      <span>Long Time</span>
-                      <span>Short Time</span>
-                    </div>
-                  </div>
-
-                  <!-- 宽带覆盖率滑块 -->
-                  <div class="metric-item" style="margin-top:20px;">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                      <label style="font-size:14px; color:var(--text-dark);">High-speed broadband availability (%)</label>
-                      <span id="broadbandValue" style="font-size:14px; font-weight:600;">90%</span>
-                    </div>
-                    <input type="range" id="broadbandSlider" min="0" max="100" value="90" class="preference-slider"
-                      style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                      oninput="document.getElementById('broadbandValue').textContent = this.value + '%'">
-                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                      <span>Low coverage</span>
-                      <span>High coverage</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 环境与宜居性 -->
-                <div class="metric-group" style="margin-top:30px;">
-                  <h4 style="margin-bottom:15px; font-size:16px;">Environment & Liveability</h4>
-
-                  <!-- 公园可达性滑块 -->
-                  <div class="metric-item">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                      <label style="font-size:14px; color:var(--text-dark);">Proportion of parks and open water (%)</label>
-                      <span id="parksValue" style="font-size:14px; font-weight:600;">80%</span>
-                    </div>
-                    <input type="range" id="parksSlider" min="0" max="100" value="80" class="preference-slider"
-                      style="width:100%; -webkit-appearance:none; appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                      oninput="document.getElementById('parksValue').textContent = this.value + '%'">
-                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                      <span>Limited access</span>
-                      <span>Abundant green space</span>
-                    </div>
-                  </div>
-
-                  <!-- 空气质量滑块 -->
-                  <div class="metric-item" style="margin-top:20px;">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                      <label style="font-size:14px; color:var(--text-dark);">Greenhouse gas emissions per capita (tCO₂e)</label>
-                      <span id="airValue" style="font-size:14px; font-weight:600;">60%</span>
-                    </div>
-                    <input type="range" id="airSlider" min="0" max="100" value="60" class="preference-slider"
-                      style="width:100%; -webkit-appearance:none; appearance:none;height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                      oninput="document.getElementById('airValue').textContent = this.value + '%'">
-                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                      <span>Poor</span>
-                      <span>Excellent</span>
-                    </div>
-                  </div>
-
-                  <!-- 人口密度滑块 -->
-                  <div class="metric-item" style="margin-top:20px;">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                      <label style="font-size:14px; color:var(--text-dark);">Population density (people per km²)</label>
-                      <span id="densityValue" style="font-size:14px; font-weight:600;">50%</span>
-                    </div>
-                    <input type="range" id="densitySlider" min="0" max="100" value="50" class="preference-slider"
-                      style="width:100%; -webkit-appearance:none; appearance:none;height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                      oninput="document.getElementById('densityValue').textContent = this.value + '%'">
-                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                      <span>Dense</span>
-                      <span>Sparse</span>
-                    </div>
-                  </div>
-                </div>
+            <!-- 左侧地图区域 -->
+            <div class="suitability-map">
+              <svg width="100%" height="500" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet"></svg>
+              <div class="suitability-tooltip"
+                style="position:absolute; background:rgba(0,0,0,0.8); color:white; padding:10px; border-radius:4px; pointer-events:none; opacity:0; transition:opacity 0.3s;">
               </div>
             </div>
 
-            <!-- 右侧指标面板 -->
-            <div class="suitability-metrics-right">
+            <!-- 右侧带拖动进度条的指标面板 -->
+            <div class="suitability-metrics">
               <h3 style="margin-bottom:20px; color:var(--primary);">Your Preferences</h3>
+
+              <!-- 可达性与连接性 -->
+              <div class="metric-group">
+                <h4 style="margin-bottom:15px; font-size:16px;">Accessibility & Connectivity</h4>
+
+                <!-- 通勤时间滑块 -->
+                <div class="metric-item">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Commute time to job hubs</label>
+                    <span id="commuteValue" style="font-size:14px; font-weight:600;">30 min</span>
+                  </div>
+                  <input type="range" id="commuteSlider" min="0" max="60" value="30" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('commuteValue').textContent = this.value + ' min'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Quick commute</span>
+                    <span>Long commute</span>
+                  </div>
+                </div>
+
+                <!-- 交通可靠性滑块 -->
+                <div class="metric-item" style="margin-top:20px;">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Transport reliability</label>
+                    <span id="transportValue" style="font-size:14px; font-weight:600;">70%</span>
+                  </div>
+                  <input type="range" id="transportSlider" min="0" max="100" value="70" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('transportValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Unreliable</span>
+                    <span>Very reliable</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 环境与宜居性 -->
+              <div class="metric-group" style="margin-top:30px;">
+                <h4 style="margin-bottom:15px; font-size:16px;">Environment & Liveability</h4>
+
+                <!-- 公园可达性滑块 -->
+                <div class="metric-item">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Access to large parks</label>
+                    <span id="parksValue" style="font-size:14px; font-weight:600;">80%</span>
+                  </div>
+                  <input type="range" id="parksSlider" min="0" max="100" value="80" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none; appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('parksValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Limited access</span>
+                    <span>Abundant green space</span>
+                  </div>
+                </div>
+
+                <!-- 空气质量滑块 -->
+                <div class="metric-item" style="margin-top:20px;">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <label style="font-size:14px; color:var(--text-dark);">Air quality</label>
+                    <span id="airValue" style="font-size:14px; font-weight:600;">60%</span>
+                  </div>
+                  <input type="range" id="airSlider" min="0" max="100" value="60" class="preference-slider"
+                    style="width:100%; -webkit-appearance:none; appearance:none;height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
+                    oninput="document.getElementById('airValue').textContent = this.value + '%'">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
+                    <span>Poor</span>
+                    <span>Excellent</span>
+                  </div>
+                </div>
+              </div>
 
               <!-- 社区与生活方式 -->
               <div class="metric-group" style="margin-top:30px;">
@@ -305,7 +269,7 @@
                 <!-- 学校评分滑块 -->
                 <div class="metric-item">
                   <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <label style="font-size:14px; color:var(--text-dark);">Share of schools rated ‘Outstanding’ (%)</label>
+                    <label style="font-size:14px; color:var(--text-dark);">Ofsted school ratings</label>
                     <span id="schoolValue" style="font-size:14px; font-weight:600;">4</span>
                   </div>
                   <input type="range" id="schoolSlider" min="1.00" max="5.00" value="4.00" step="0.1"
@@ -313,88 +277,23 @@
                     style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
                     oninput="document.getElementById('schoolValue').textContent = parseFloat(this.value).toFixed(1)">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                    <span>Low Percentage</span>
-                    <span>High Percentage</span>
+                    <span>Lower rated</span>
+                    <span>Highly rated</span>
                   </div>
                 </div>
 
                 <!-- 多样性滑块 -->
                 <div class="metric-item" style="margin-top:20px;">
                   <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <label style="font-size:14px; color:var(--text-dark);">Number of Restaurant, café, and pub</label>
+                    <label style="font-size:14px; color:var(--text-dark);">Cultural diversity</label>
                     <span id="diversityValue" style="font-size:14px; font-weight:600;">90%</span>
                   </div>
                   <input type="range" id="diversitySlider" min="0" max="100" value="90" class="preference-slider"
                     style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
                     oninput="document.getElementById('diversityValue').textContent = this.value + '%'">
                   <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                    <span>Low</span>
-                    <span>High</span>
-                  </div>
-                </div>
-
-                <!-- 超市密度滑块 -->
-                <div class="metric-item" style="margin-top:20px;">
-                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <label style="font-size:14px; color:var(--text-dark);">Supermarkets per 1,000 residents</label>
-                    <span id="supermarketValue" style="font-size:14px; font-weight:600;">50%</span>
-                  </div>
-                  <input type="range" id="supermarketSlider" min="0" max="100" value="50" class="preference-slider"
-                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                    oninput="document.getElementById('supermarketValue').textContent = this.value + '%'">
-                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                    <span>Fewer options</span>
-                    <span>Many options</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 经济与幸福 -->
-              <div class="metric-group" style="margin-top:30px;">
-                <h4 style="margin-bottom:15px; font-size:16px;">Economic & Wellbeing</h4>
-
-                <!-- 可支配收入滑块 -->
-                <div class="metric-item">
-                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <label style="font-size:14px; color:var(--text-dark);">Gross disposable household income (£ per year)</label>
-                    <span id="incomeValue" style="font-size:14px; font-weight:600;">60%</span>
-                  </div>
-                  <input type="range" id="incomeSlider" min="0" max="100" value="60" class="preference-slider"
-                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                    oninput="document.getElementById('incomeValue').textContent = this.value + '%'">
-                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                    <span>Lower income</span>
-                    <span>Higher income</span>
-                  </div>
-                </div>
-
-                <!-- 周薪水平滑块 -->
-                <div class="metric-item" style="margin-top:20px;">
-                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <label style="font-size:14px; color:var(--text-dark);">Median weekly pay (£)</label>
-                    <span id="payValue" style="font-size:14px; font-weight:600;">60%</span>
-                  </div>
-                  <input type="range" id="paySlider" min="0" max="100" value="60" class="preference-slider"
-                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                    oninput="document.getElementById('payValue').textContent = this.value + '%'">
-                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                    <span>Lower pay</span>
-                    <span>Higher pay</span>
-                  </div>
-                </div>
-
-                <!-- 幸福指数滑块 -->
-                <div class="metric-item" style="margin-top:20px;">
-                  <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                    <label style="font-size:14px; color:var(--text-dark);">Average happiness index (1–10)</label>
-                    <span id="happinessValue" style="font-size:14px; font-weight:600;">75%</span>
-                  </div>
-                  <input type="range" id="happinessSlider" min="0" max="100" value="75" class="preference-slider"
-                    style="width:100%; -webkit-appearance:none;appearance:none; height:8px; background:#e0e0e0; border-radius:4px; outline:none;"
-                    oninput="document.getElementById('happinessValue').textContent = this.value + '%'">
-                  <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);">
-                    <span>Less happy</span>
-                    <span>Very happy</span>
+                    <span>Less diverse</span>
+                    <span>Highly diverse</span>
                   </div>
                 </div>
               </div>
@@ -593,7 +492,7 @@
 </div>
 
         </section>
-
+  
         <!-- 区域指南卡片 -->
         <section id="guides" style="background-color:var(--neutral);padding:40px;border-radius:8px;margin:40px 0;">
           <div class="section-title">
@@ -617,26 +516,6 @@
             <h2>About</h2>
             <p>Have questions about London's housing market or need personalized advice? Get in touch with our experts.
             </p>
-          </div>
-          <div style="max-width: 600px; margin: 0 auto;">
-            <form>
-              <div style="margin-bottom: 15px;">
-                <label for="name" style="display: block; margin-bottom: 5px; font-weight: 600;">Your Name</label>
-                <input type="text" id="name"
-                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-              </div>
-              <div style="margin-bottom: 15px;">
-                <label for="email" style="display: block; margin-bottom: 5px; font-weight: 600;">Email Address</label>
-                <input type="email" id="email"
-                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-              </div>
-              <div style="margin-bottom: 15px;">
-                <label for="message" style="display: block; margin-bottom: 5px; font-weight: 600;">Your Message</label>
-                <textarea id="message" rows="4"
-                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
           </div>
         </section>
       </div>
