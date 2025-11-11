@@ -247,6 +247,14 @@ function getPreferences() {
                 return score ? colorScale(score) : "#ccc";
             });
         }
+                // 🆕 Create an array of borough scores for recommendation
+const boroughScores = Object.keys(scores).map(name => ({
+    name,
+    score: scores[name]
+}));
+
+// 🆕 Generate recommendation summary
+generateRecommendation(preferences, boroughScores);
     }
 
     // Initialize map
@@ -333,4 +341,46 @@ tooltip.html(`
     }
 
     initializeMap();
+       function generateRecommendation(preferences, boroughScores) {
+  const recBox = document.getElementById("recommendationBox");
+  const recText = document.getElementById("recommendationText");
+  if (!recBox || !recText) return;
+
+   const messages = [];
+
+  // Accessibility & Connectivity
+  if (preferences.commute < 40) messages.push("short commutes");
+  if (preferences.transport > 60) messages.push("efficient public transport");
+  if (preferences.broadband > 70) messages.push("strong broadband connectivity");
+
+  // Environment & Liveability
+  if (preferences.parks > 70) messages.push("abundant green space");
+  if (preferences.air > 70) messages.push("cleaner air");
+  if (preferences.density < 40) messages.push("low-density neighborhoods");
+
+  // Community & Lifestyle
+  if (preferences.school > 70) messages.push("great schools");
+  if (preferences.diversity > 70) messages.push("vibrant dining and cultural options");
+  if (preferences.supermarket > 70) messages.push("plenty of nearby shops");
+
+  // Economic & Wellbeing
+  if (preferences.income > 70) messages.push("wealthier communities");
+  if (preferences.pay > 70) messages.push("higher earning potential");
+  if (preferences.happiness > 70) messages.push("happier residents");
+  // Pick top 3 boroughs (assuming boroughScores = [{name, score}, ...])
+  const top3 = boroughScores
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map(b => b.name);
+
+  // Build narrative text
+  const prefText =
+    messages.length > 0
+      ? `You prefer areas with ${messages.slice(0, 4).join(", ")}`
+      : `You have a balanced mix of priorities`;
+
+  recText.innerHTML = `🎯 ${prefText} — try <b>${top3.join(", ")}</b>.`;
+  recBox.style.display = "block";
+}
+
 })();

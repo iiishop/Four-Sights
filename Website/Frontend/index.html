@@ -56,16 +56,17 @@
         <section id="intro">
           <div class="section-title">
             <h2>Introduction</h2>
+            <img src="assets/img/house.png" 
+     alt="London Housing Illustration" 
+     style="width:100%; max-width:800px; display:block; margin:25px auto; border-radius:8px;">
           </div>
-          <p>Welcome to our London borough by borough report, providing an in-depth analysis of every London borough's
-            performance across key housing market indicators.</p>
-          <p>As a global hub for finance, history, culture, and education, London's enduring appeal continues to
-            captivate residents and investors alike.</p>
-          <p>This report takes a comprehensive look at London's boroughs, highlighting the unique characteristics that
-            make each one an attractive destination to live, work, and invest.</p>
-          <p>Through rigorous research and local market insight, we identify the key drivers of residential real estate
-            across London, empowering you to make informed decisions about buying or renting in this vibrant and diverse
-            city.</p>
+          <p>Welcome to the <strong>London Housing Market Explorer</strong> — your interactive guide to understanding how London’s housing market has evolved across all 33 boroughs.</p>
+
+<p>Whether you’re a resident, a student, or simply curious about London’s neighborhoods, this platform lets you explore how prices, livability, and community dynamics change across the city. Hover, compare, and discover what makes each borough unique — from the fast-changing East End to the leafy suburbs of the South and West.</p>
+
+<p>Built by students of the <strong>MSc Connected Environments</strong> at University College London, this project turns complex datasets from the <strong>ONS</strong>, <strong>GLA</strong>, and <strong>HM Land Registry</strong> into clear visual stories you can interact with — not just read about.</p>
+
+<p>Our aim is simple: to help you make sense of the numbers behind London’s housing market and see the city through data — dynamic, diverse, and constantly changing.</p>
         </section>
 
         <!-- compare -->
@@ -160,7 +161,7 @@
           <div class="section-text-header">
             <h2>Find your ideal neighborhoods</h2>
             <p>Adjust the sliders to match your priorities and find the perfect London neighborhood.</p>
-          </div>
+          </div><div class="suitability-container">
 
           <div class="suitability-container">
             <div class="suitability-left">
@@ -170,7 +171,11 @@
                   style="position:absolute; background:rgba(0,0,0,0.8); color:white; padding:10px; border-radius:4px; pointer-events:none; opacity:0; transition:opacity 0.3s;">
                 </div>
               </div>
-
+         <div id="recommendationBox" 
+     style="margin-top:30px; background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); display:none;">
+  <h3 style="margin-top:0;">Your Ideal Boroughs</h3>
+  <p id="recommendationText" style="font-size:16px; color:#333;"></p>
+</div>
               <div class="suitability-metrics-bottom">
                 <div class="metric-group">
                   <h4 style="margin-bottom:15px; font-size:16px;">Accessibility & Connectivity</h4>
